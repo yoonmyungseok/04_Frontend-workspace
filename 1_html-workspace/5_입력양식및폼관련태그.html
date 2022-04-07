@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입력 양식 및 폼 관련 태그</title>
+</head>
+
+<body>
+    <!--
+        *입력양식이란?
+        홈페이지의 로그인 화면이나, 게시판 화면이나, 검색창이거나, 회원가입 화면 같이 사용자로부터 일정한 양식에 따라서 값을 받는 폼
+        =>사용자로부터 입력받은 값들을 컨트롤러로 넘길 예정
+    -->
+    <h1>입력 양식 관련 태그</h1>
+    <h2>input 태그</h2>
+    <p>
+        사용자에게 값을 입력받을 수 있는 텍스트 상자 또는 체크박스 등등을 만들 수 있음
+    </p>
+    아이디: <input type="text"><br>
+    비밀번호: <input type="password"><br>
+    성별: <input type="radio">남 <input type="radio">여<br>
+    <input type="submit" value="회원가입">
+    <button>회원가입</button>
+    <hr>
+    <h1>폼 관련 태그</h1>
+    <p>
+        입력 양식의 틀을 의미<br>
+        form 태그 내에 있는 submit 버튼을 클릭 시 해당 form 내에 작성된 사용자가 입력한 값들을 서버의 컨트롤러로 넘기면서 요청하는 역할을 수행함<br>
+        form action="보낼경로(목적지)" method="보내는방법"<br>
+        *action 속성: 해당 from 내에 사용자가 작성한 값들을 전달하면서 요청할 서버의 경로를 제시(어느 기능을 담당하는 컨트롤러로 보낼건지 지정)<br>
+        *method 속성: 요청 전송 방식을 지정하는 속성( GET(기본값)/POST)<br>
+        >GET 방식: 요청 시 사용자가 입력한 값들이 url 주소에 노출되는 방식<br>
+        >POST 방식: 요청 시 사용자가 입력한 값들이 url 주소에 노출되지 않는 방식=>주로 민감한 정보를 넘길 때 쓰는 것이 좋음(개인정보)<br>
+
+        form 태그 내의 제출(submit) 버튼 클릭 시 action에 지정한 서버로 method에 작성한 요청 전송 방식으로 사용자가 입력했던 값들을 key=value 세트로 전달<br>
+        =>이 때, 여러 key=value&key=value&... 를 쿼리스트링 이라고 부른다
+    </p>
+    <fieldset>
+        <form action="test.do" method="get">
+            검색 내용: <input type="text" name="keyword">
+            <!--name 속성: key값-->
+            <input type="submit" value="검색">
+        </form>
+    </fieldset>
+    <hr>
+    <h3>fieldset: 그룹을 묶는 태그(기본적으로 테두리를 만들어줌)</h3>
+    <h3>legend: 해당 그룹의 제목을 붙이는 태그(없어도 상관없음)</h3>
+    <form action="test2.do" method="post">
+        <fieldset>
+            <legend>제목1</legend>
+            입력1: <input type="text" name="text1"><br>
+            입력2: <input type="text" name="text2">
+        </fieldset>
+        <fieldset>
+            <legend>제목2</legend>
+            입력3: <input type="text" name="text3"><br>
+            입려4: <input type="text" name="text4">
+        </fieldset>
+        <input type="submit">
+    </form>
+    <hr>
+    <h2>text와 관련된 input 태그의 타입</h2>
+    <form action="test3.do" method="post">
+        <h3>type="text"</h3>
+        <p>
+            -한 줄짜리 텍스트를 입력할 수 있는 텍스트상자(기본값)
+        </p>
+        <label>아이디: </label>
+        <input type="text" name="userId" placeholder="아이디를 입력하세요" maxlength="12" required>
+        <br>
+        <h3>type="password"</h3>
+        <p>
+            -비밀번호를 입력할 수 있는 텍스트 상자(꼭 비밀번호가 아니더라도 보안에 민감한 개인정보를 입력받고자 할 때 사용)
+        </p>
+        <label>비밀번호: </label>
+        <input type="password" name="userPwd" placeholder="영문, 숫자, 특수문자 8~15" maxlength="15" required>
+        <br>
+        <h3>type="search/url/email"</h3>
+        <p>
+            -겉모습은 일반 텍스트상자와 유사하지만 각각의 정보에 맞게 세분화된 기능을 제공
+        </p>
+        <label>검색: </label>
+        <input type="search" name="keyword" placeholder="검색어를 입력하세요">
+        <br>
+        <label>홈페이지: </label>
+        <input type="url" name="hompage" value="http://">
+        <br>
+        <label>이메일: </label>
+        <input type="email" name="email">
+        <br><br>
+        <input type="submit">
+    </form>
+</body>
+
+</html>

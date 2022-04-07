@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 및 멀티미디어 관련 태그</title>
+</head>
+
+<body>
+    <h1>이미지 관련 태그</h1>
+    <!--
+        <img src="삽입하고자하는이미지의경로" alt="이미지설명문구" 
+        width="이미지의가로길이(px/%)" height="이미지의세로길이(px/%)">
+    -->
+    <h3>*src 속성, alt 속성</h3>
+    <img src="resources/image/peng.jpg" alt="이 사진은 펭수입니다">
+    <br>
+    <img src="resources/image/jun.png" alt="어? 예쁘다">
+    <p>
+        *alt<br>
+        -사진에 경로가 잘못되었거나 이미지를 제대로 표현할 수 없을 때 대체 텍스트의 용도로 사용되는 설명 문구<br>
+        -시각 장애인을 위한 스크린리더(화면낭독기)에서 이미지를 읽어주는 설명 문구로도 사용됨(접근성이 높아짐)
+    </p>
+    <hr>
+    <h3>*width와 height 속성</h3>
+    <p>
+        이미지의 가로, 세로 길이를 조정 가능한 속성 <br>
+        고정길이(px), 가변길이(%)로 지정
+    </p>
+    <h4>고정길이 단위(px)==기본값: 화면사이즈가 조정이 되더라도 이미지의 크기는 변동이 없음</h4>
+    <h5>퀸가현의 꽃밭!</h5>
+    <img src="resources/image/flower.jpg" width="200" height="150">
+    <img src="resources/image/flower2.jpg" width="200" height="150">
+    <img src="resources/image/flower3.jpg" width="200" height="150">
+    <img src="resources/image/flower4.jpg" width="200" height="150">
+    <img src="resources/image/flower5.jpg" width="200" height="150">
+    <br>
+    <h4>가변길이단위(%): 화면사이즈 혹은 부모 요소 사이즈에 따라서 이미지의 크기도 같이 변동</h4>
+    <img src="resources/image/flower.jpg" width="15%" height="150">
+    <img src="resources/image/flower2.jpg" width="15%" height="150">
+    <img src="resources/image/flower3.jpg" width="15%" height="150">
+    <img src="resources/image/flower4.jpg" width="15%" height="150">
+    <img src="resources/image/flower5.jpg" width="15%" height="150">
+    <br>
+    <hr>
+    <h1>미디어 관련 태그</h1>
+    <h3>오디오 관련 태그</h3>
+    <!--
+        <audio src="오디오경로" controls autoplay loop></audio>
+        autoplay:자동 재생여부 지정(크롬 X,IE O)
+        loop: 반복 재생여부 지정
+    -->
+    <audio src="resources/audio/major.mp3" controls autoplay loop></audio>
+    <h3>비디오 관련 태그</h3>
+    <!--
+        <video src="비디오파일경로" controls autoplay loop width="가로길이" height="세로길이" poster="썸네일이미지"></video>
+        autoplay: 자동 재생여부 지정(크롬 X, IE O)
+        loop: 반복 재생여부 지정
+        poster: 썸네일 이미지(대표사진) 지정
+    -->
+    <video src="resources/video/video1.mp4" controls autoplay loop width="400" height="200"
+        poster="resources/image/coffee.png"></video>
+</body>
+
+</html>

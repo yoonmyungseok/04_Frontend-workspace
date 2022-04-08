@@ -93,6 +93,147 @@
         <br><br>
         <input type="submit">
     </form>
+    <h2>textarea 태그</h2>
+    <p>
+        -텍스트상자이나 여러 줄을 입력할 수 있는 텍스트상자
+    </p>
+    <form action="test.do">
+        <fieldset>
+            <legend>글 작성</legend>
+            글 제목: <input type="text" name="title" size="30"><br>
+            글 내용: <textarea name="content" cols="30" rows="10" style="resize: none;"></textarea><br>
+            <input type="submit" value="작성하기">
+        </fieldset>
+    </form>
+    <hr>
+    <h2>숫자와 관련된 input 태그의 타입</h2>
+    <form action="test.do" method="get">
+        <h3>type="number"</h3>
+        <p>
+            -숫자값만 입력 가능한 텍스트상자<br>
+            -스핀박스가 표시됨(스핀박스: 위/아래 화살표 버튼)
+        </p>
+        수량: <input type="number" name="amount" min="0" max="20" step="2" value="0">
+        <h3>type="range"</h3>
+        <p>
+            -슬라이드바를 통해서 숫자를 지정 가능
+        </p>
+        점수: <input type="range" name="score" min="0" max="100" step="20"><br>
+        <input type="submit">
+        <input type="reset">
+    </form>
+    <hr>
+    <h2>날짜 및 시간과 관련된 input 태그의 타입</h2>
+    <form action="test.do" method="post">
+        <h3>type="date/month/week/time/datetime-local"</h3>
+        date: <input type="date" name="dateIn"><br>
+        <!--연도,월,일을 입력받을 수 있는 텍스트 상자-->
+        month: <input type="month" name="monthIn"><br>
+        <!--연도, 월 까지만 입력받을 수 있는 텍스트 상자-->
+        week: <input type="week" name="weekIn"><br>
+        <!--연도, 해당 년도의 몇 번째 주인지 입력받을 수 있는 텍스트 상자-->
+        time: <input type="time" name="timeIn"><br>
+        <!--오전/오후, 시, 분을 입력받을 수 있는 텍스트 상자-->
+        datetime-local: <input type="datetime-local" name="datetime-localIn"><br>
+        <!--연도, 월, 일, 오전/오후, 시, 분을 입력받을 수 있는 텍스트 상자-->
+        <button type="submit">제출</button>
+    </form>
+    <hr>
+    <h2>라디오 버튼과 체크박스 관련 input 태그의 타입</h2>
+    <form action="test.do" method="get">
+        <h3>라디오 버튼(type="radio")</h3>
+        <p>
+            -제시한 여러개의 값들 중에서 오로지 한 개의 값만 선택해야 할 때 <br>
+            (name 속성값이 똑같은 것들 끼리 하나의 그룹으로 이어짐)<br>
+            -제출 시 현재 선택된 (checked) 값이 넘어감
+        </p>
+        성별:
+        <input type="radio" id="radioX" name="gender" value="X" checked><label for="radioX">선택안함</label>
+        <input type="radio" id="radioM" name="gender" value="M"><label for="radioM">남자</label>
+        <input type="radio" id="radioF" name="gender" value="F"><label for="radioF">여자</label>
+        <br>
+        <h3>체크박스(type="checkbox")</h3>
+        <p>
+            -제시한 여러 개의 값들 중에서 여러 개의 값을 선택 가능한 경우<br>
+            -현재 선택된(checked) 값들이 넘어감<br>
+            -넘기고자 하는 value 값을 명시해야 함<br>
+            (나중에 컨트롤러에서 배열 형태로 전달 받을 예정)
+        </p>
+        취미:
+        <input type="checkbox" id="baseball" name="hobby" value="baseball"><label for="baseball">야구</label>
+        <input type="checkbox" id="basketball" name="hobby" value="basketball"><label for="basketball">농구</label>
+        <input type="checkbox" id="soccer" name="hobby" value="soccer"><label for="soccer">축구</label>
+        <br><br>
+        <input type="submit">
+    </form>
+    <hr>
+    <form action="test.do">
+        <h2>추가적인 input 태그의 타입</h2>
+        <h3>type="color"</h3>
+        <p>
+            -색상을 선택할 수 있는 input 태그<br>
+            색상 선택: <input type="color" name="color">
+        </p>
+        <h3>type="file"</h3>
+        <p>
+            -첨부하고자 하는 파일을 선택할 수 있는 input 태그<br>
+            파일선택: <input type="file" name="uploadFile">
+        </p>
+        <h3>type="hidden"</h3>
+        <p>
+            -특정 값을 사용자에게 입력받지 않고 화면에 노출시키지도 않으면서 넘기고자 하는 값이 있을 경우 사용하는 input 태그<br>
+            안보임: <input type="hidden" name="hidden" value="앜">
+        </p>
+        <br><br>
+        <h2>버튼 생성방법 총 정리</h2>
+        <h3>input type="submit/reset/button"</h3>
+        <input type="submit">
+        <!--value="제출" 생략 시 기본값-->
+        <input type="reset">
+        <!--value="초기화" 생략 시 기본값-->
+        <input type="button" value="일반버튼">
+        <br><br>
+        <h3>button type="submit/reset/button"</h3>
+        <button type="submit">제출</button>
+        <button type="reset">초기화</button>
+        <button type="button">일반버튼</button>
+        <button>type 속성 생략 시?</button>
+        <!--
+            button 태그에 type 속성 생략 시 submit 임
+            그래서 form 태그 내에서 button 작성 시 무조건 type 속성을 명시해야함(헷갈리지 않게)
+        -->
+    </form>
+    <hr>
+    <h2>select 태그와 option 태그</h2>
+    <p>
+        -사용자에게 직접 키보드로 입력받는게 아니라 내가 제시한 여러 옵셔들 중에서 마우스로 클릭해서 선택할 수 있게끔 해주는 태그<br>
+        -제출 시 현재 선택된 (selected) 값이 넘어감<br>
+        -각각의 option에 value 속성값을 넣으면 value 값이 전달됨<br>
+        -만일, value를 명시 안했을 경우 기본적으로 option 태그의 content 영역(시작태그와 종료태그 사이)의 값이 value로 넘어감
+    </p>
+    <form action="test.do">
+        국적:
+        <select name="national">
+            <option value="ko">한국</option>
+            <option value="us">미국</option>
+            <option value="jp">일본</option>
+            <option value="cn">중국</option>
+            <option selected>선택안함</option>
+            <!--selected 옵션이 없을시 맨 위의 항목이 자동 선택되어짐-->
+        </select>
+        <br><br>
+        <h4>HTML5에서 새로 추가된 기능</h4>
+        <!--dataList: 목록에 없더라도 직접 text 상자에 값을 기술해서 넘길 수 있음.
+                    기존의 select-option 태그와 input type=text"를 결합한 형태
+        -->
+        좋아하는 색상: <input type="text" name="color" list="colorList">
+        <datalist id="colorList">
+            <option value="black">검정색</option>
+            <option value="white">흰색</option>
+            <option value="skyblue">하늘색</option>
+            <option value="pink">분홍색</option>
+        </datalist>
+    </form>
 </body>
 
 </html>

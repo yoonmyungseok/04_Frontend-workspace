@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기본 선택자</title>
+    <style>
+        /*  CSS 영역: 스타일을 기술할 수 있는 영역 */
+        /*  1. 전체 선택자  
+        *{
+            color: red;
+        }
+        */
+        /* 2. 태그 선택자 */
+        /*
+        p{
+            color: red;
+        }
+        pre{
+            color: blue;
+        }
+        */
+        /* 3. 아이디선택자 */
+        #id1,
+        #id3 {
+            color: pink;
+            background-color: yellow;
+        }
+    </style>
+    <!--
+        내부 스타일 방식: 현재 이 문서에 스타일을 부여하고자 하는 스타일 정보들을 
+                        head 태그 영역 안에 style 태그 내에 기입하는 방식
+                        이 html 문서 안에다가 스타일 정보를 저장하는 방법
+    -->
+</head>
+
+<body>
+    <h1 style="color:teal;">CSS 기본 선택자</h1>
+    <!--
+        인라인 스타일 방식: 스타일을 부여하고자 하는 요소 내에
+                            style 속성을 명시적으로 이용해서 직접적으로 바로 기입하는 방식
+    -->
+    <h3>선택자란?</h3>
+    <p>
+        특정 html 요소를 선택하고자 할 때 사용하는 기능 <br>
+        해당 요소를 선택해서 원하는 "스타일"과 기능을 적용시킬 수 있다
+    </p>
+    <h3>1. 모든 (전체) 선택자 (*)</h3>
+    <p>
+        모든 요소들을 다 선택하고자 할 때 사용
+    </p>
+    <pre>
+        [표현법]
+        *{
+            스타일속성명: 값;
+            스타일속성명: 값;
+            ...
+        }
+    </pre>
+    <hr>
+    <h3>2. 태그 선택자(태그명)</h3>
+    <p>
+        해당 이 문서 내에 해당 같은 태그들을 모두 선택할 때 사용됨
+    </p>
+    <pre>
+        [표현법]
+        태그명 {
+            스타일속성명: 값;
+            스타일속성명: 값;
+            ...
+        }
+    </pre>
+    <hr>
+    <h3>3. 아이디 선택자 (#아이디속성값)</h3>
+    <p>
+        해당 이 문서 내에 특정 html 요소 하나만을 선택하고자 할 때 사용<br>
+        단, 해당 그 요소 id 속성을 이용할 때에는 고유한 id 값을 부여해야 한다.(중복 불가)
+    </p>
+    <pre>
+        [표현법]
+        #아이디속성값{
+            스타일속성명: 값;
+            스타일속성명: 값;
+            ...
+        }
+    </pre>
+    <ol>
+        <li id="id1">아이디선택자</li>
+        <li id="id2">아이디선택자</li>
+        <li id="id3">아이디선택자</li>
+        <li id="id4">아이디선택자</li>
+    </ol>
+</body>
+
+</html>

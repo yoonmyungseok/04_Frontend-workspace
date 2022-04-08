@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입력양식연습숙제</title>
+</head>
+
+<body>
+    <form action="test.do" method="post">
+        <fieldset>
+            <legend>납품자 정보</legend>
+            <table>
+                <tr>
+                    <td>납품자명</td>
+                    <td><input type="text" placeholder="ex) 홍길동"></td>
+                </tr>
+                <tr>
+                    <td>email</td>
+                    <td><input type="email" placeholder="ex)ex@ex.com"></td>
+                </tr>
+                <tr>
+                    <td>홈페이지</td>
+                    <td><input type="text" placeholder="http://"></td>
+                </tr>
+            </table>
+        </fieldset>
+        <fieldset>
+            <legend>납품 정보</legend>
+            <table>
+                <tr>
+                    <td>상품명</td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>납품수량</td>
+                    <td><input type="number" placeholder="최소100" min="100"></td>
+                </tr>
+                <tr>
+                    <td>납품등급</td>
+                    <td><input type="range"></td>
+                </tr>
+                <tr>
+                    <td>기타사항</td>
+                    <td><textarea style="resize: none;"></textarea></td>
+                </tr>
+            </table>
+        </fieldset>
+        <br>
+        <input type="reset" value="초기화">
+        <input type="submit" value="전송">
+    </form>
+</body>
+
+</html>

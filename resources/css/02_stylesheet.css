@@ -1,0 +1,70 @@
+/*CSS 영역(스타일 정보를 바로 기입)*/
+/* 1. 속성 선택자 */
+
+/* div 태그 중 name 속성 값이 name1과 "일치"하는 요소 */
+div[name=name1]{
+    background-color: orangered;
+}
+
+/*div 태그 중 name 속성값에 name1이 "포함" 되어있는 요소 */
+div[name~=name1]{
+    background-color: aquamarine;
+}
+
+/*div 태그 중 class 속성값이 div로 "시작"되는 요소(-앞의 한 단어로써 )*/
+div[class|=div]{
+    background-color:blue;
+}
+
+/* div 태그 중에서 name 속성값이 na로 "시작"되는 요소 */
+div[name^=na]{
+    background-color: chartreuse;
+}
+
+/* div 태그 중에서 class 속성값이 ss로 "끝"나는 요소 */
+div[class$=ss]{
+    color: white;
+}
+
+/* div 태그 중에서 class 속성값에 i가 "포함"되어있는 요소 */
+div[class*=i]{
+    background-color: yellow;
+}
+
+/*응용 : class 속성값이 div-class인 애들 중에서 name 속성값에 name3이 포함되어있는 요소 */
+.div-class[name~=name3]{
+    background-color: aqua;
+}
+
+/* 2. 자손선택자와 후손선택자 */
+/* a>b : a 요소의 자손들 중에서 b요소들만 선택하겠다(자손)*/
+/* id 속성값이 test1인 요소의 자식들 중에서 h4들만 선택하겠다 */
+#test1>h4{
+    background-color: orangered;
+}
+
+/* 중첩사용 가능 */
+/* id 속성값이 test1인 요소의 자식들 중에서 ul 태그의 자식 중에서 li 태그들만 선택하겠다 */
+#test1>ul>li{
+    background-color: darkcyan;
+}
+
+/* a b: a 요소의 후손(자손도 포함)들 중에서 b 요소들만 선택하겠다(후손)*/
+/* id 속성값이 test1인 요소의 후손들 중에서 li 태그들만 선택하겠다 */
+#test1 li{
+    background-color: orange; /*우선순위가 낮아서 적용이 안됨 */
+    color:red;
+}
+
+/* 3. 동위 선택자 */
+/* a+b: a 요소 뒤에 b 요소 하나만을 선택 */
+/* id 속성값이 test2인 요소 뒤의 div 태그 하나만 선택하고자할 때 */
+#test2+div{
+    background-color: yellow;
+}
+
+/* id 속성값이 test2인 요소 뒤의 ul 요소 하나만 선택하고자 할 때 */
+#test2+ul{
+    background-color: red; /* 마침 ul이 바로 뒤의 요소가 아니기 때문에 선택이 안됨 */
+}
+

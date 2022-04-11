@@ -34,65 +34,128 @@
 개인정보보호법에 따라 네이버에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히읽은 후 동의하여 주시기 바랍니다.
             </textarea>
             <br>
-            <input type="radio"><label>동의합니다</label>
-            <input type="radio" checked><label>동의하지않습니다</label>
+            <input type="radio" id="agree2" name="sign2" value="signAgree2"><label for="agree2">동의합니다</label>
+            <input type="radio" id="disagree2" name="sign2" value="signDisagree2" checked><label
+                for="disagree2">동의하지않습니다</label>
             <br><br>
-            <input type="checkbox">모두 동의합니다.
+            <input type="checkbox" id="allAgree" name="allAgree" value="all"><label for="allAgree">모두 동의합니다.</label>
             <br><br>
-            <input type="reset" value="취소">
-            <input type="submit" value="확인">
+            <input type="reset" value="취소" name="reset1">
+            <input type="submit" value="확인" name="submit1">
         </form>
     </fieldset>
     <br><br>
     <fieldset>
         <legend><b>회원가입 양식</b></legend>
         <form action="test1.do" method="post">
-            * 아이디<br>
-            <input type="text" size="30" minlength="5" maxlength="20" placeholder="영문 소문자, 숫자, 특수기호(_,-) 5~20"
-                required>&nbsp;<button>아이디 중복 확인</button>
-            <br><br>
-            * 비밀번호<br>
-            <input type="password" size="30" minlength="8" maxlength="15" placeholder="영문, 숫자, 특수문자 8~15" required>
-            <br><br>
-            * 비밀번호 재확인<br>
-            <input type="password" size="30" minlength="8" maxlength="15" placeholder="영문, 숫자, 특수문자 8~15" required>
-            <br><br>
-            * 이름<br>
-            <input type="text" size="30" required>
-            <br><br>
-            * 주민등록번호<br>
-            <input type="text" size="11" required>&nbsp;-&nbsp;<input type="password" size="12" required>
-            <br><br>
-            * 성별<br>
-            <input type="radio" checked><label>선택안함</label>&nbsp;<input type="radio"><label>남자</label>&nbsp;<input
-                type="radio"><label>여자</label>
-            <br><br>
-            * 생년월일<br>
-            <input type="date" required>
-            <br><br>
-            주소<br>
-            <input type="text" size="30">
-            <br><br>
-            우편번호<br>
-            <input type="text" size="16">&nbsp;<button>우편번호찾기</button>&nbsp;<input type="checkbox">우편 수신 동의
-            <br><br>
-            이메일<br>
-            <input type="email" size="30">&nbsp;<input type="checkbox">이메일 수신 동의
-            <br><br>
-            휴대폰번호<br>
-            <select>
-                <option>010</option>
-                <option>011</option>
-                <option>016</option>
-                <option>017</option>
-                <option>019</option>
-            </select>
-            -
-            <input type="text" size="5">
-            -
-            <input type="text" size="5">&nbsp;<input type="checkbox">문자 수신 동의
-            <br><br>
-            <input type="reset" value="초기화">&nbsp;<input type="submit" value="가입하기">
+            <table>
+                <tr>
+                    <td>* 아이디</td>
+                </tr>
+                <tr>
+                    <td><input name="id" type="text" size="30" minlength="5" maxlength="20"
+                            placeholder="영문 소문자, 숫자, 특수기호(_,-) 5~20" required></td>
+                    <td><button>아이디 중복 확인</button></td>
+                </tr>
+                <tr>
+                    <td>* 비밀번호</td>
+                </tr>
+                <tr>
+                    <td><input name="pw1" type="password" size="30" minlength="8" maxlength="15"
+                            placeholder="영문, 숫자, 특수문자 8~15" required></td>
+                </tr>
+                <tr>
+                    <td>* 비밀번호 재확인</td>
+                </tr>
+                <tr>
+                    <td><input name="pw2" type="password" size="30" minlength="8" maxlength="15"
+                            placeholder="영문, 숫자, 특수문자 8~15" required></td>
+                </tr>
+                <tr>
+                    <td>* 이름</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="name" size="30" required></td>
+                </tr>
+                <tr>
+                    <td>* 주민등록번호</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="birth" size="11" required>
+                        -
+                        <input type="password" name="ssn" size="12" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>* 성별</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" id="noCheck" name="gender" checked><label for="noCheck">선택안함</label>
+                        <input type="radio" id="CheckM" name="gender"><label for="CheckM">남자</label>
+                        <input type="radio" id="CheckF" name="gender"><label for="CheckF">여자</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>* 생년월일</td>
+                </tr>
+                <tr>
+                    <td><input type="date" name="birthDay" required></td>
+                </tr>
+                <tr>
+                    <td>주소</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="address" size="30"></td>
+                </tr>
+                <tr>
+                    <td>우편번호</td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="zip" size="30"></td>
+                    <td><button>우편번호찾기</button>
+                        <input type="checkbox" id="zipAgree"><label for="zipAgree">우편 수신 동의</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                </tr>
+                <tr>
+                    <td><input type="email" name="email" size="30"></td>
+                    <td><input type="checkbox" id="emailAgree"><label for="emailAgree">이메일 수신 동의</label></td>
+                </tr>
+                <tr>
+                    <td>휴대폰번호</td>
+                </tr>
+                <tr>
+                    <td>
+                        <select>
+                            <option>010</option>
+                            <option>011</option>
+                            <option>016</option>
+                            <option>017</option>
+                            <option>019</option>
+                        </select>
+                        -
+                        <input type="text" name="phone" size="5">
+                        -
+                        <input type="text" name="phone" size="5">
+                    </td>
+                    <td>
+                        <input type="checkbox" id="sms"><label for="sms">문자 수신 동의</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="reset" value="초기화" name="reset2">
+                        <input type="submit" value="가입하기" name="submit2">
+                    </td>
+                </tr>
+            </table>
         </form>
     </fieldset>
     <br><br>

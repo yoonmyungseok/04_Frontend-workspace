@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기타선택자</title>
+    <link href="../resources/css/02_stylesheet.css" rel="stylesheet">
+
+    <!--
+        외부 스타일 방식: 스타일 정보만을 따로 관리하는 .css 외부문서를 만들고
+                        link 태그를 이용해서 연결시켜주는 방법
+    -->
+
+</head>
+
+<body>
+    <h2>1. 속성 선택자</h2>
+    <p>
+        스타일을 부여하고자 하는 요소 내에 작성되어 있는 속성을 이용해서 선택하는 방법<br>
+        선택자 뒤에 []를 이용해서 속성과 속성값을 추가 조건으로 제시해서 선택하는 방법
+    </p>
+    <pre>
+        [표현법]
+        선택자[속성=속성값]{    =>"일치"
+        선택자[속성~=속성값]{   =>"포함" (단어 기준)
+        선택자[속성|=속성값]{   =>"시작" (-로 구분된 단어 기준)
+        선택자[속성^=속성값]{   =>"시작" (일반문자열 기준)
+        선택자[속성$=속성값]{   =>"끝" (일반문자열기준)
+        선택자[속성*=속성값]{   =>"포함" (일반문자열기준)
+            스타일속성명 : 값;
+            스타일속성명 : 값;
+        }
+    </pre>
+    <!--div*4: 에밋문법에 의해 div 태그가 4개 만들어짐-->
+    <div class="div-class" name="name1">div1</div>
+    <div class="div-class" name="name2">div2</div>
+    <div class="div-class" name="name3 name1">div3</div>
+    <div class="class-div" name="name3">div4</div>
+
+    <hr>
+    <h2>2. 자손 선택자와 후손 선택자</h2>
+    <p>
+        자손: 바로 하위인 요소들 (시작 태그와 종료 태그 사이에 있는 것)<br>
+        후손: 하위 요소들 전부 (자식 포함)
+    </p>
+    <pre>
+        [표현법]
+        *자손선택자(>)
+        a>b{
+            스타일속성명: 값;
+            스타일속성명: 값;
+        }
+        *후손선택자()
+        a b {
+            스타일속성명:값;
+            스타일속성명:값;
+            ...
+        }
+    </pre>
+    <div id="test1">
+        <h4>div의 자손이면서 후손입니다</h4>
+        <h4>div의 자손이면서 후손입니다.</h4>
+        <ul>
+            div의 자손이면서 후손입니다
+            <li>나는 ul의 자손이면서 div의 후손입니다</li>
+            <li>나는 ul의 자손이면서 div의 후손입니다</li>
+
+        </ul>
+    </div>
+    <hr>
+    <h2>3. 동위 (같은 레벨) 선택자</h2>
+    <p>
+        동위 관계(같은 레벨)에 있는 뒤에 위치한 특정 요소를 선택할 때 사용
+    </p>
+    <pre>
+        [표현법]
+        * a 요소 뒤에 있는 b 요소 "하나만"을 선택하고자 할 때
+        a+b{
+            스타일속성명: 값;
+            ...
+        }
+        * a 요소 뒤에 있는 b 요소 "모두"를 선택하고자 할 때
+        a~b{
+            스타일속성명:값;
+            ...
+        }
+    </pre>
+    <div id="test2">div1</div>
+    <div>div2</div>
+    <div>div3</div>
+    <div>div4</div>
+    <ul>ul 요소</ul>
+</body>
+
+</html>

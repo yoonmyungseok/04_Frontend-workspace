@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테두리 관련 스타일</title>
+    <style>
+        div{
+            width:100px;
+            height: 100px;
+            border-width: 3px;
+            margin: 15px;
+        }
+        #test1{
+            border-style: dotted;
+            border-width: 10px;
+            border-color: green;
+            border-top-style: double;
+            border-right-color: red;
+            border-bottom-width: 1px;
+        }
+        #test2{
+            border: 10px dotted green;
+            border-left-style: solid;
+            border-top: 5px dashed red;
+        }
+        #test3{
+            /*
+            border-top-style: dashed;
+            border-right-style: double;
+            border-bottom-style: solid;
+            border-left-style: dotted;
+            */
+            /* 12시 방향으로부터 시계방향으로 적용 */
+            border-style: dashed double solid dotted;
+        }
+        #test4{
+            border-style: groove; /*패인 액자틀 느낌*/
+            border-width: 10px;
+            border-top-left-radius: 50px;
+        }
+        #test5{
+            border-style: ridge; /*튀어나온 액자틀 느낌 */
+            border-width: 10px;
+            border-bottom-right-radius: 80px;
+        }
+        #test6{
+            border-style: inset; /*면적 자체가 안으로 움푹 패인 느낌 */
+            border-width: 10px;
+            border-top-left-radius: 60px;
+            border-bottom-right-radius: 60px;
+            background-color: yellow;
+        }
+        #test7{
+            border-style: outset; /*면적 자체가 튀어나온 느낌 */
+            border-width: 10px;
+        }
+        #test8{
+            border-radius: 50px;
+            border-style: solid;
+        }
+        #test9{
+            box-shadow: 5px 5px 10px 5px gray;
+        }
+        #test10{
+            border:2px dashed pink;
+        }
+        #btn{
+            border : 2px dashed pink; /*버튼도 테두리 지정 가능 */
+            padding: 10px 20px; /* 버튼도 안쪽여백(padding) 지정 가능*/
+            border-radius: 10px; /*버튼도 테두리 모양 둥그스름하게 지정 가능*/
+        }
+        #btn:hover{ /* 반응 선택자 */
+            background-color: gray;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>테두리 관련 스타일(border~)</h1>
+    <pre>
+        [표현법]
+        선택자{
+            *테두리 스타일
+            border[-위치]-style: none/dotted/dashed/solid/double/groove/ridge/inset/outset
+
+            *테두리 두께
+            border[-위치]-width: 테두리두께;
+
+            *테두리 색상
+            border[-위치]-color: 테두리색상;
+
+            *테두리 두께, 스타일, 색상 한번에 지정 가능
+            border[-위치]: 두께 스타일 색상; =>색상 생략 가능(글자색으로 통일됨)
+
+            *테두리 모서리를 둥그스름 하게
+            border[-위/아래][-좌/우]-radius: 숫자값; =>위치 생략 시 사방이 둥그스름해짐
+
+            *박스에 그림자 효과
+            box-shadow: 가로거리(x) 세로거리(y) 흐림정도 번짐정도 색상;
+        }
+        =>위치값: 위/아래/좌/우 (top/bottom/left/right)
+    </pre>
+    <!--div#test$*10+enter-->
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+    <div id="test4"></div>
+    <div id="test5"></div>
+    <div id="test6"></div>
+    <div id="test7"></div>
+    <div id="test8"></div>
+    <div id="test9"></div>
+    <div id="test10"></div>
+
+    <button id="btn">로그인</button>
+</body>
+</html> 

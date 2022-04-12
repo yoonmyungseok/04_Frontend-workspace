@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>목록 관련 스타일</title>
+    <style>
+        #ul1{list-style-type: square;}
+        #ol1{list-style: upper-roman;}
+
+        #ul2{
+            list-style-position: inside;
+            list-style-image: url("resources/image/iconsample.png");
+        }
+    </style>
+</head>
+<body>
+    <h1>목록 관련 스타일 (list~)</h1>
+    <h3>list-style-type: 불릿기호를 변경시켜줄 때 사용</h3>
+    <pre>
+        [표현법]
+        * 순서 없는 목록 (ul)
+        선택자{list-style-type: disc/circle/square/none;}
+
+        * 순서 있는 목록 (ol)
+        선택자{
+            list-style-type: decimal/decimal-leading-zero;
+            list-style-type: lower-alpha/upper-alpha;
+            list-style-type: lower-roman/upper-roman;    
+        }
+    </pre>
+
+    <h4>순서 없는 목록</h4>
+    <!--ul#ul1>li*4-->
+    <ul id="ul1">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>jQuery</li>
+    </ul>
+
+    <h4>순서 있는 목록</h4>
+    <!--ol#ol1>li*4-->
+    <ol id="ol1">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>jQuery</li>
+    </ol>
+    
+    <hr>
+    <h3>list-style-position: 불릿기호의 위치를 조정할 때 사용</h3>
+    <h3>list-style-image: 불릿기호로 이미지를 적용할 때 사용</h3>
+
+    <pre>
+        [표현법]
+        선택자{
+            list-style-position: inside/outside;
+            list-style-image: url("적용시키고자하는이미지의경로");
+        }
+    </pre>
+    
+    <h4>KH 정보교육원 위치 안내</h4>
+    <ul id="ul2">
+        <li>강남본원 1관</li>
+        <li>강남본원 2관</li>
+        <li>강남본원 3관</li>
+        <li>당산지원</li>
+        <li>종로지원</li>
+    </ul>
+</body>
+</html>

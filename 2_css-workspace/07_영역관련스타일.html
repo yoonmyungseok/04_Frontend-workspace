@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영역 관련 스타일</title>
+    <style>
+        .test{
+            background-color: yellow;
+            border: 10px solid black; /* div 요소는 border 영역까지 포함 */
+            width: 100px;
+            height: 100px; /* width와 height는 content 영역의 크기를 의미 */
+        }
+        #test1{
+            padding: 100px; /* 위 아래 좌 우 균일하게 100px 씩*/
+        }
+        #test2{
+            padding-top: 50px;
+            padding-left: 100px;
+        }
+        #test3{
+            /* 12시방향부터 시계방향으로 패딩값을 지정 */
+            padding: 50px 20px 10px 0px;
+            /* 위아래 좌우 */
+            /*padding: 50px 20px;*/
+        }
+        #test4{
+            margin: 50px;
+        }
+        #test5{
+            margin-top: 50px;
+            margin-left: 20px;
+        }
+        #test6{
+            /* 12시 방향부터 시계방향으로 마진값을 지정 */
+            /*margin: 30px 20px 10px 0px;*/
+            /*화면 크기가 변할 때 좌우 간격을 자동으로 가운데로 맞춰준다 */
+            margin:auto;
+        }
+    </style>
+</head>
+<body>
+    <!--실제 요소가 차지하는 영역: content+padding+border-->
+    <h1>여백 및 간격 관련 스타일</h1>
+    <h4>기준 div</h4>
+    <div class="test">기준 div</div>
+
+    <hr>
+    <h3>padding</h3>
+    <p>
+        내용물영역(content)과 테두리영역(border) 사이의 거리(여백)을 조정하는 스타일 속성<br>
+        (패딩을 따로 지정하지 않으면 기본값으로 0px이 잡힌다)
+    </p>
+    <div id="test1" class="test">컨텐츠 영역</div>
+    <b>padding: 100px;</b><br><br>
+
+    <div id="test2" class="test">컨텐츠 영역</div>
+    <b>padding-top : 50px; padding-left: 10px;</b><br><br>
+
+    <div id="test3" class="test">컨텐츠 영역</div>
+    <b>padding: 50px 20px 10px 0px;</b><br><br>
+
+    <hr>
+    <h3>margin</h3>
+    <p>
+        타 요소들 간의 간격을 조정할 때 사용 (바깥 여백, 실제 요소의 범위가 아님)
+    </p>
+    <div id="test4" class="test">컨텐츠 영역</div>
+    <b>margin: 50px;</b><br><br>
+    <div id="test5" class="test">컨텐츠 영역</div>
+    <b>margin-top:50px; margin-left:20px;</b>
+    <div id="test6" class="test">컨텐츠 영역</div>
+    <b>margin: auto;</b><br><br>
+</body>
+</html>

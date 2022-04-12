@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>CSS연습문제</title>
+    <style>
+        form {
+            background-color: #5b8618;
+            border-radius: 10px;
+            padding: 15px;
+            width: 400px;
+        }
+
+        fieldset {
+            border: 0;
+        }
+
+        ol {
+            margin: 0;
+            padding: 0;
+        }
+
+        ol>li {
+            list-style: none;
+            border: 1px solid #ffffff;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.39);
+            padding: 5px;
+            margin: 1px;
+            height: 30px;
+        }
+
+        label {
+            width: 150px;
+            margin-left: 10px;
+            float: left;
+        }
+
+        #submit_btn {
+            width: 80px;
+            height: 30px;
+            border: 0;
+            color: white;
+            background-color: #345207;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS3</h1>
+
+    <form action="">
+
+        <fieldset>
+
+            <legend>Step 1: 로그인 정보</legend>
+
+            <ol>
+
+                <li><label for="id">아이디</label> <input type="text" name="id">
+
+                </li>
+
+                <li><label for="password">비밀번호</label> <input type="password" name="password"></li>
+
+                <li><label for="chkpwd">비밀번호 확인</label> <input type="password" name="chkpwd"></li>
+
+                <li><label for="grade">회원 등급</label> <input type="text" name="grade" value="준회원"></li>
+
+            </ol>
+
+        </fieldset>
+
+        <fieldset>
+
+            <legend>Step 2: 개인 정보</legend>
+
+            <ol>
+
+                <li><label for="name">이름</label> <input type="text" name="name" placeholder="5자미만 공백없이"></li>
+
+                <li><label for="email">메일 주소</label> <input type="email" name="email" placeholder="abcd@domain.com">
+                </li>
+
+                <li><label for="phone">연락처</label> <input type="phone" name="phone"></li>
+
+            </ol>
+
+        </fieldset>
+
+        <fieldset>
+
+            <legend>Step 3: 코딩 숙련도(상, 중, 하)</legend>
+
+            <ol>
+
+                <li><input type="range"></li>
+
+            </ol>
+
+        </fieldset>
+
+        <fieldset>
+
+            <input type="submit" value="제출" id="submit_btn">
+
+        </fieldset>
+
+    </form>
+
+</body>
+
+</html>
+​

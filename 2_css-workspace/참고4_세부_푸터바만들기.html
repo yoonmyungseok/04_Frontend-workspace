@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*작업을 위한 임시스타일 */
+        div{
+            box-sizing: border-box;
+            /*border: 1px solid red;*/
+        }
+        #footer{
+            width: 1000px;
+            height: 150px;
+        }
+        /* footer 크게 두가지 영역*/
+        #footer>div{width: 100%;}
+
+        #footer_1{height: 20%;}
+        #footer_2{height: 80%;}
+
+        /*footer_2의 상세 영역 */
+        #footer_2>p{
+            width: 100%;
+            /*border: 1px solid blue;*/
+            margin: 0;
+            box-sizing: border-box;
+            /*
+                현재 p 요소에 box-sizing: border-box가 잡혀있지 않아서 테두리가 튀어나온것
+            */
+            font-size: 12px;
+        }
+        #p1{height: 80%;padding: 5px 15px;}
+        #p2{height: 20%;text-align: center;}
+        /*
+            p 태그의 특성=> 기본적으로 위아래에 margin이 잡힘
+                            공통적으로 p 태그에 margin:0px 적용하면 됨
+        */
+        /* footer_1의 a 태그들 스타일 수정하기 */
+        #footer_1>a{
+            text-decoration: none;
+            color:#111;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 15px;
+            vertical-align: middle; /* 수직 구조에서 가운데로 오게끔 해주는 속성 */
+        }
+    </style>
+</head>
+<body>
+    <div id="footer">
+        <div id="footer_1">
+            <a href="">이용약관</a> |
+            <a href="">개인정보취급방침</a> |
+            <a href="">인재채용</a> |
+            <a href="">고객센터</a>
+        </div>
+        <div id="footer_2">
+            <p id="p1">
+                강남지원 1관 : 서울특별시 강남구 테헤란로14길 6 남도빌딩 2F, 3F, 4F, 5F, 6F<br>
+                강남지원 2관 : 서울특별시 강남구 테헤란로10길 9 그랑프리 빌딩 4F, 5F, 7F<br>
+                강남지원 3관 : 서울특별시 강남구 테헤란로 130 호산빌딩 5F, 6F<br>
+                종로지원 : 서울특별시 중구 남대문로 120 대일빌딩 2F, 3F<br>
+                당산지원 : 서울특별시 영등포구 선유동2로 57 이레빌딩 (구관) 19F, 20F
+            </p>
+            <p id="p2">
+                Copyright © 1998-2022 KH Information Educational Institute All Right Reserved
+            </p>
+        </div>
+    </div>
+</body>
+</html>

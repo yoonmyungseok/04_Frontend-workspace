@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            box-sizing: border-box;
+            /* 지금부터 지정하는 가로세로길이는 테두리까지 포함하는 길이임을 알려줌*/
+            border:1px solid red;
+        }
+        /* 전체를 감싸는 wrap */
+        .wrap{
+            width: 1000px;
+            height: 800px;
+            margin: auto;
+        }
+
+        /*크게 세가지 영역*/
+        /*#header, #content, #footer{*/
+        .wrap>div{ /* class 속성이 wrap인 요소의 자식들중에 모든 div 태그들을 선택하겠다*/
+            width: 100%;
+        }
+        #header, #footer{
+            height: 20%;
+        }
+        #content{
+            height: 60%;
+        }
+        #content>div{
+            height: 100%;
+            float: left;
+        }
+        #content_1{
+            width: 20%;
+        }
+        #content_2{
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div id="header"></div>
+        <div id="content">
+            <div id="content_1"></div>
+            <div id="content_2"></div>
+        </div>
+        <div id="footer"></div>
+    </div>
+</body>
+</html>

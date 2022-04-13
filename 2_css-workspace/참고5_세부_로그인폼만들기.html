@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div,form{
+            box-sizing: border-box;
+            /*border: 1px solid red;*/
+        }
+        #content_3{
+            width: 300px;
+            height: 600px;
+        }
+        /* 전체내용을 감싸는 div */
+        #login_form{
+            width: 100%;
+            height: 30%;
+        }
+        /*2_1, 2_2 속성 지정 */
+        #login_form>*{
+            width: 100%;
+        }
+
+        /* 2_1, 2_2의 각각의 세로길이, 스타일 적용*/
+        #login_form_input{
+            height: 80%;
+        }
+        #login_form_etc{
+            height: 20%;
+            text-align: center;
+            /* a 태그에 대해서 가운데 정렬 해주려면 부모 요소에 설정해줘야 함 */
+        }
+
+        /*3_1, 3_2 공통 속성 지정 */
+        #login_form_input>*{
+            float: left;
+            height: 100%;
+        }
+
+        /* 3_1, 3_2 각각의 가로길이, 스타일 적용 */
+        #login_input_id_pwd{
+            width:65%;
+            
+        }
+        #login_input_btn{
+            width: 35%;
+        }
+
+        /* 3_1의 자식인 input 태그들에 대한 스타일 적용 */
+        #login_input_id_pwd>input{
+            width:100%;
+            height: 50%;
+            box-sizing: border-box;
+        }
+        /* 3_2의 자식인 submit 버튼에 대한 스타일을 적용 */
+        #login_input_btn>input{
+            width: 100%;
+            height:100%;
+        }
+        /* 2_2의 자식인 a 태그들에 대한 스타일 적용 */
+        #login_form_etc>a{
+            text-decoration: none;
+            color: black;
+            margin: 10px;
+            font-size: 12px;
+            vertical-align: middle;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="content_3">
+        <!--1. 전체 내용을 감싸는 div-->
+        <div id="login_form">
+            <!--2_1. 입력을 받는 input 요소들이 위치할 form 영역-->
+            <form action="test.do" method="post" id="login_form_input">
+                <!--3_1. 왼쪽 : 아이디와 비밀번호를 입력받을 text영역-->
+                <div id="login_input_id_pwd">
+                    <input type="text" name="userId" placeholder="아이디 입력" required><br>
+                    <input type="password" name="userPwd" placeholder="비밀번호 입력" required> 
+                </div>
+                <!--3_2. 오른쪽: 로그인 버튼이 위치할 button 영역-->
+                <div id="login_input_btn">
+                    <input type="submit" value="로그인">
+                </div>
+            </form>
+            <!--2_2. 회원가입, ID/PWD 찾기 페이지 요청을 위한 a 태그들이 들어갈 div 영역-->
+            <div id="login_form_etc">
+                <a href="">회원가입</a>
+                <a href="">ID/PWD 찾기</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

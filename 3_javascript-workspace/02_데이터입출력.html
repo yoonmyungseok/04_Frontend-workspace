@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>데이터 입출력</title>
+    <style>
+        .area{
+            border: 1px solid black;
+            width: 300px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>자바스크립트에서의 데이터 입출력</h1>
+    <!--
+        window: 자바스크립트 내장 객체로 브라우저창이 열릴때 마다 하나씩 생성되는 객체
+                브라우저 창 안에 존재하는 모든 요소들의 최상위 객체
+                (즉, 모든 곳에 적용 가능=>window. 구문은 생략 가능) 
+                window.alert(); => alert();
+                window.console.log(); => console.log();
+        
+        document: html 문서에 대한 정보들을 담고있는 객체
+                웹  문서마다 하나씩 만들어지는 객체(html 파일 하나당 한개씩)
+                document.getElementById();
+    -->
+    <h2>1. 데이터를 출력하는 기본 구문</h2>
+    <p>
+        1) window.alert("알림창에 출력할 문구"); <br>
+        2) window.console.log("콘솔창에 출력할 문구"); <br>
+        3) document.write("화면에 출력할 문구"); <br>
+        4) 선택한요소.innerHTML/innerText="해당요소에 출력할 문구";
+    </p>
+    <h3>1) window.alert("알림창에 출력할 문구");</h3>
+    <button onclick="alert('알림창 출력');">알림창 출력</button>
+    <br>
+    <h3>2) window.console.log("콘솔창에 출력할 문구");</h3>
+    <button onclick="console.log('콘솔창 출력');">콘솔창 출력</button>
+    <br>
+    <h3>3) document.write("화면에 출력할 문구");</h3>
+    <button onclick="documentWrite();">화면에 출력</button>
+    <script>
+        function documentWrite(){
+            //document.write("잘 출력되나...?");    //테스트1
+            document.write("<b>잘 출력되나...?</b><br><h2>태그가 먹히나?</h2>");    //테스트2
+            //html 태그가 문자열 내에 포함된 경우에는 잘 해석이 되고 있음
+            //화면에 출력할 문자열에 html 태그가 있을 경우 진짜 html 태그로 해석이 되서 보여짐
+
+            //문자열로 표 만들기
+            let table="<table border='1'>";
+                table+="<tr>";
+                table+="<td>1</td>";
+                table+="<td>2</td>";
+                table+="</tr>";
+            
+            document.write(table);
+        }
+    </script>
+    <br>
+    <h3>4) 선택한요소.innerHTML/innerText="해당요소에 출력할 문구";</h3>
+    <div class="area" id="area1">
+        자바스크립트에서 어떤 요소(element) 안의 값(content 영역 내용물)을 가지고 온다거나<br>
+        변경하고자 할 때 <b>innerHTML, innerText</b>라는 속성에 접근 가능
+    </div>
+    <button onclick="tagValue();">확인</button>
+    <script>
+        function tagValue(){
+            //id 속성값이 area1인 div의 내용물을 가져와서 콘솔에 찍고싶다
+            //특정 요소의 값을 가지고 온다거나 변경하고자 할 때
+            //우선적으로 해당 요소 객체를 소스코드상으로 끌고 와야함
+            const divEl=document.getElementById('area1'); //div 요소 자체를 코드상으로 끌고와서 변수에 담음
+
+            //변수에 값이 잘 담겨있나?
+            console.log(divEl);
+            console.dir(divEl); //해당 값의 디렉토리 구조를 보고자 할 때(속성들의 정보)
+
+            //선택된 요소 내에 정보들을 알아내고자 한다면 .속성명 으로 정보를 알아낼 수 있음
+            //=> .innertHTML, .innerText으로 content 영역의 값을 알아낼 수 있다
+            console.log(divEl.innerHTML); //요소의 content 영역 안의 html 태그들까지 다 포함한 문자열
+            console.log(divEl.innerText); //요소의 content 값 내의 실제 텍스트 내용들만 포함. html 태그는 가져오지 않는다
+
+            //divEl.innerHTML="<b>innerHTML로 속성값을 변경했음</b>";
+            //innerHTML로 문자열 내용을 변경하면 출력할 문구에 html 태그가 있을 경우 태그로 인식됨
+            //console.log("변경 후:"+divEl.innerHTML);
+            
+            divEl.innerText="<b>innerText로 속성값을 변경했음</b>";
+            //innerText로 문자열 내용을 변경하면 출력할 문구에 html 태그가 있을 경우 태그로 인식되지 않고 문자열로 그대로 출력됨
+            console.log("변경 후: "+divEl.innerText);
+
+            //id, class 속성값
+            //console.log(divEl.id);
+            //console.log(divEl.className);
+        }
+    </script>
+    <br>
+    <h4>회원가입</h4>
+    <input type="text" placeholder="아이디를 입력하세요" id="userId">
+    <button onclick="idCheck();">아이디 중복확인</button><br>
+    <div id="idCheck"></div>
+    <script>
+        function idCheck(){
+            //우선적으로 요소 자체를 끌고와야함
+            const userIdEl=document.getElementById('userId');
+
+            //사용자가 입력한 아이디값
+            const userId=userIdEl.value;
+
+            const divEl = document.getElementById("idCheck");
+            if(userId=="user01"){
+                //중복된 아이디일 경우=>사용불가합니다
+                divEl.innerHTML="사용 불가한 아이디입니다";
+            }else{
+                //사용가능한 아이디입니다
+                divEl.innerHTML="사용 가능한 아이디입니다";
+            }
+        }
+    </script>
+    <br><br>
+    <hr>
+    <h2>2. 데이터를 입력하는 기본 구문</h2>
+    <p>
+        1) 변수=window.confirm('질문할내용'); <br>
+        2) 변수=window.prompt('질문할내용'); <br>
+        3) 변수=선택한요소.속성명(innerHTML/innerText);<br>
+        4) 변수=선택한요소.value;
+    </p>
+    <br>
+
+    <h3>1) window.confirm('질문할내용');</h3>
+    <p>
+        confirm 함수 호출 시 "질문할내용"과 "확인/취소" 버튼을 가진 알림창이 뜸<br>
+        확인 버튼 클릭 시 true/취소 버튼 클릭 시 false가 반환됨
+    </p>
+    <button onclick="testConfirm();">클릭</button>
+    <div class="area" id="area2"></div>
+
+    <script>
+        function testConfirm(){
+            const result=confirm('졸리면 확인, 아니면 취소를 누르세요');
+
+            //console.log(result);
+            
+            //div 영역에 결과를 출력
+            const divEl= document.getElementById('area2');
+            if(result){ //true
+                divEl.innerHTML="<h2>졸려요</h2>";
+            }else{//false
+                divEl.innerHTML="<h2>안졸려요</h2>";
+            }
+        }
+    </script>
+    <br>
+    <h3>2) window.prompt('질문할내용');</h3>
+    <p>
+        prompt 함수 호출 시 "질문할 내용"과 "입력할 수 있는 텍스트상자"와 "확인/취소"버튼을 가지고있는 알림창이 뜸<br>
+        -확인버튼 클릭 시 텍스트상자에 입력되어있는 값이 반환됨<br>
+        -취소버튼 클릭 시 null 값이 반환됨
+    </p>
+    <button onclick="testPrompt();">클릭</button>
+    <div class="area" id="area3"></div>
+    <script>
+        function testPrompt(){
+            const name=prompt('당신의 이름은 무엇입니까?');
+            const age=prompt('당신의 나이는 몇살입니까?');
+
+            //console.log(name);
+            //console.log(age);
+
+            //앗! 당신이 바로 xx살 xxx님이군요?? 반갑습니다^^
+            let result="앗! 당신이 바로 "+age+"살 "+name+"님이군요?? 반갑습니다^^";
+
+            const divEl=document.getElementById('area3');
+            
+            divEl.innerHTML=result;
+        }
+    </script>
+    <br><br>
+    <button onclick="testPrompt2();">숫자입력</button>
+    <ul id="ul1"></ul>
+
+    <script>
+        function testPrompt2(){
+            const num=prompt("숫자만 입력하세요.");
+
+            let str="";
+            for(let i=0; i<num; i++){
+                str+="<li>안녕하세요</li>";
+            }
+            const ulEl=document.getElementById('ul1');
+            ulEl.innerHTML=str;
+        }
+    </script>
+    <br>
+    <h3>3) 선택한요소.속성명;</h3>
+    <button onclick="testClick();">클릭</button>
+    <div class="area" id="area4">안녕하세요</div>
+    입력내용: <input type="text" id="input1">
+
+    <script>
+        function testClick(){
+            const divEl=document.getElementById('area4');
+
+            let str=divEl.innerHTML;
+
+            document.getElementById('input1').value=str;
+        }
+    </script>
+    <br><br>
+
+    <h4>4) 선택한input요소.value;</h4>
+    아이디: <input type="text" id="userId4"><br>
+    비밀번호: <input type="password" id="userPwd4"><br>
+
+    <button onclick="testInput();">클릭</button>
+
+    <script>
+        function testInput(){
+            const userIdEl=document.getElementById('userId4'); //input 요소 객체
+            const userPwdEl=document.getElementById('userPwd4');
+
+            //console.dir(userIdEl);
+            console.log(userIdEl.value);
+            console.log(userPwdEl.value);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            box-sizing: border-box;
+            /*border: 1px solid red;*/
+        }
+        #navigator{
+            width: 1000px;
+            height: 40px;
+        }
+
+        /* navi에 대한 스타일 적용 */
+        #navi{
+            /*border: 1px solid blue;*/
+            margin: 0; 
+            /*  ul 요소도 기본적으로 위, 아래에 margin이 존재
+                ul 요소에 기본적으로 padding 또한 존재
+            */
+            padding: 0;
+            height: 100%;
+        }
+        li{
+            list-style: none;
+        }
+        #navi>li{
+            box-sizing: border-box;
+            /*border: 1px solid green;*/
+            float: left;
+            width: 20%;
+            height: 100%;
+            text-align: center;
+        }
+
+        /* 공통적인 메뉴 글씨에 대해서 스타일 적용*/
+        #navi a{
+            text-decoration: none;
+            color: lightcoral;
+            font-size: 16px;
+            font-weight: 900;
+            width: 100%;
+            height: 100%;
+            /*
+                인라인 요소의 특징: width, height 속성이 안먹힘
+                =>a 태그는 인라인 요소니까 width, height 속성을 블록요소로 바꿔줘야 함(display:block)
+            */
+            display: block;
+            /*vertical-align: middle; *//* vertical-align은 블럭요소에서 먹히지 않는 속성 */
+            line-height:2.1;
+        }
+        #navi a:hover{
+            color:crimson;
+            font-size: 18px;
+        }
+
+        /*서브메뉴에 대한 스타일 적용*/
+        #navi>li>ul{
+            padding: 0;
+            display: none; /* 1단계)일단은 서브메뉴 숨기기 */
+        }
+        #navi>li>a:hover+ul{
+            display: block; /* 2단계)서브메뉴 보이기 */
+        }
+
+        #navi>li>ul:hover{
+            display: block; /*3단계)마우스가 서브메뉴에 있을 때에도 서브메뉴 보이기가 유지되야 함*/
+        }
+        
+        /* 서브메뉴 글씨 조절 */
+        #navi>li>ul a{
+            font-size: 14px;
+        }
+        #navi>li>ul a:hover{
+            font-size:16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="navigator">
+        <ul id="navi">
+            <li><a href="">Java</a></li>
+            <li><a href="">Oracle</a></li>
+            <li><a href="">Front-End</a>
+                <ul>
+                    <li><a href="">HTML</a></li>
+                    <li><a href="">CSS</a></li>
+                    <li><a href="">Javascript</a></li>
+                    <li><a href="">jQuery</a></li>
+                </ul>
+            </li>
+            <li><a href="">Server</a>
+                <ul>
+                    <li><a href="">JDBC</a></li>
+                    <li><a href="">Servlet</a></li>
+                    <li><a href="">JSP</a></li>
+                    <li><a href="">AJAX</a></li>
+                </ul>
+            </li>
+            <li><a href="">Framework</a>
+                <ul>
+                    <li><a href="">MyBatis</a></li>
+                    <li><a href="">Spring</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

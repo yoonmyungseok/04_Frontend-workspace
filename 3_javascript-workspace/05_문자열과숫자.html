@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열과 숫자</title>
+    <style>
+        .area{
+            width: 300px;
+            border: 1px solid pink;
+        }
+        .small{
+            height: 200px;
+        }
+        .big{
+            height: 450px;
+        }
+    </style>
+</head>
+<body>
+    <h1>문자열과 숫자</h1>
+    <h3>* 문자열 관련 메소드</h3>
+    <button onclick="showStringMethod();">문자열 처리 메소드</button>
+
+    <!--div#area1.area.big-->
+    <div id="area1" class="area big"></div>
+    
+    <script>
+        function showStringMethod(){
+            var str1='Hello World';
+
+            var area1=document.getElementById('area1');
+
+            area1.innerHTML="str1: "+str1+"<br>";
+            area1.innerHTML+='toUpperCase() : '+str1.toUpperCase()+'<br>';
+            area1.innerHTML += 'toLowerCase() : ' + str1.toLowerCase() + '<br>';
+            area1.innerHTML += "문자열의 길이: "+str1.length+"<br>";
+
+            for(var i=0; i<str1.length; i++){
+                area1.innerHTML+=i+"번째 인덱스: "+ str1.charAt(i)+"<br>";
+            }
+            area1.innerHTML += "앞에서부터 첫 l의 위치: " + str1.indexOf('l') + "<br>";
+            area1.innerHTML += "뒤에서부터 첫 l의 위치: " + str1.lastIndexOf('l')+"<br>";
+            area1.innerHTML += "앞에서부터 첫 a의 위치: " + str1.indexOf('a')+"<br>";
+            //해당 문자가 존재하지 않을 경우 -1을 반환
+
+            area1.innerHTML += "substring(시작인덱스) : "+str1.substring(6)+"<br>";
+            area1.innerHTML += "substring(시작인덱스, 끝인덱스) : "+str1.substring(0, 2)+"<br>";
+            //시작인덱스<= 범위 <끝인덱스
+
+            var str2="사과, 바나나, 복숭아, 키위";
+            var fruits=str2.split(","); //["사과", "바나나", "복숭아", "키위"]
+
+            area1.innerHTML +="fruits: "+fruits+"<br>";
+            area1.innerHTML +="fruits의 자료형: "+typeof(fruits);
+
+            console.log(fruits);
+            //자바에서의 문자열 관련 메소드들과 거의 유사한 형태임!!
+        }
+    </script>
+    <hr>
+    <h3>* 숫자(수학) 관련 메소드</h3>
+    <button onclick="showMathMethod();">수학 관련 메소드</button>
+    <div id="area2" class="area small"></div>
+    <script>
+        function showMathMethod(){
+            var area2=document.getElementById('area2');
+
+            //자바스크립트에서는 Math 내장객체를 제공
+            //Math.메소드명();
+            area2.innerHTML='절대값: '+ Math.abs(-123)+"<br>";
+            area2.innerHTML+="랜덤값: "+Math.random()+"<br>";
+            //0.0이상 1.0 미만의 구간에서 아무 숫자를 반환
+
+            area2.innerHTML+="반올림: " + Math.round(123.567)+"<br>"; //위치지정불가(무조건 소수점 기준)
+            area2.innerHTML +="버림: "+Math.floor(123.456)+"<br>";
+            area2.innerHTML +="올림: "+Math.ceil(123.456)+"<br>";
+            area2.innerHTML +="제곱근: "+Math.sqrt(4)+"<br>";
+
+            //자바에서의 Math 클래스에서 제공하는 메소드들과 유사한 형태
+        }
+    </script>
+    <hr>
+    <h3>* 문자열과 숫자간의 산술연산</h3>
+    <button onclick="arithmetic();">산술연산</button>
+    <div id="area3" class="area big"></div>
+
+    <script>
+        function arithmetic(){
+
+            //숫자와 문자열 사이의 자동형변환
+            var test1=7+7; //14
+            var test2=7+"7"; //"77"
+            var test3="7"+7; //"77"
+            var test4="7"+7+7; //"777"
+            var test5="7"+(7+7); //"714"
+
+            document.getElementById('area3').innerHTML="test1: "+test1+"<br>";
+            document.getElementById('area3').innerHTML+="test2: "+test2+"<br>";
+            document.getElementById('area3').innerHTML +="test3: "+test3+"<br>";
+            document.getElementById('area3').innerHTML +="test4: "+test4+"<br>";
+            document.getElementById('area3').innerHTML +="test5: "+test5+"<br>";
+            //덧셈의 경우 숫자형태가 문자열형태로 자동형변환이 이루어진다
+
+            //그 이외의 산술연산인 경우(-, *, /)
+            var test6="7" *7; //49
+            var test7="7"-7; //0
+            var test8="7"/7; //1
+            document.getElementById('area3').innerHTML += "test6: " + test6 + "<br>";
+            document.getElementById('area3').innerHTML += "test7: " + test7 + "<br>";
+            document.getElementById('area3').innerHTML += "test8: " + test8 + "<br>";
+            //그 이외의 연산일 경우 문자열이 자동형변환으로 숫자형으로 변환된 뒤
+            //산술 연산이 이루어짐
+            //단, 해당 문자열에는 숫자만 존재해야함 (NaN: Not a Number)=>자동, 강제형변환 모두 주의사항
+
+            //강제형변환 (문자열을 숫자형태로)
+            //Number(문자열)
+            //parseInt(문자열)
+            //parseFloat(문자열)
+
+            var iNum=2; //숫자
+            var sNum="3"; //문자열
+
+            var test9=iNum+sNum; //2+"3"=23
+            var test10=iNum+Number(sNum); //2+3=5
+            var test11=iNum+parseInt(sNum); //2+3=5
+            var test12=iNum+parseFloat(sNum); //2+3=5
+            document.getElementById('area3').innerHTML += "test9: "+test9+"<br>";
+            document.getElementById('area3').innerHTML += "test10: " + test10 + "<br>";
+            document.getElementById('area3').innerHTML += "test11: " + test11 + "<br>";
+            document.getElementById('area3').innerHTML += "test12: " + test12 + "<br>";
+
+            //각 차이점
+            var fNum="1.234";
+
+            var test13=iNum+fNum; //2+"1.234"="21.234"
+            var test14=iNum+Number(fNum); //2+1.234=3.234
+            var test15=iNum+parseInt(fNum); //2+1=3 (소수점이 절삭됨)
+            var test16=iNum+parseFloat(fNum); //2+1.234=3.234
+
+            document.getElementById('area3').innerHTML += "test13: " + test13 + "<br>";
+            document.getElementById('area3').innerHTML += "test14: " + test14 + "<br>";
+            document.getElementById('area3').innerHTML += "test15: " + test15 + "<br>";
+            document.getElementById('area3').innerHTML += "test16: " + test16 + "<br>";
+
+            //강제형변환(숫자를 문자열형태로)
+            //String(숫자)
+            var a=1;
+            var b=2;
+
+            var test17=a+b; //1+2=3
+            var test18=String(a)+String(b); // "1"+"2"="12"
+
+            document.getElementById('area3').innerHTML += "test17: " + test17 + "<br>";
+            document.getElementById('area3').innerHTML += "test18: " + test18 + "<br>";
+        }
+    </script>
+
+    <hr>
+    <h3>* 실습(덧셈계산기) *</h3>
+    정수1 : <input type="number" id="num1"><br>
+    정수2 : <input type="number" id="num2"><br>
+
+    결과 : <label id="result"></label><br>
+    <button onclick="plus();">덧셈</button>
+
+    <script>
+        function plus(){
+            //정수값 가져오기
+            var num1=document.getElementById('num1').value; //"10"
+            var num2=document.getElementById('num2').value; //"20"
+
+            //덧셈 연산
+            //var sum=num1+num2; // "10"+"20"="1020"
+
+            //형변환 한 상태로 덧셈 연산
+            var sum=Number(num1)+Number(num2);
+            
+            //result에 출력
+            document.getElementById('result').innerHTML=sum;
+        }
+    </script>
+</body>
+</html>

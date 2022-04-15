@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>요소 가져오기</title>
+    <style>
+        .area{
+            border:1px solid black;
+            width: 300px;
+            height: 100px;
+        }
+    </style>
 </head>
 <body>
     <!--
@@ -23,5 +30,176 @@
     </ol>
     
     <h3>1) 아이디값으로 가져오기</h3>
+    <div id="area1" class="area"></div>
+    <button onclick="accessId();">아이디로 접근</button>
+    <script>
+        function accessId(){
+            //아이디로 요소에 접근할 때
+            //document.getElementById('아이디명');
+            const area1=document.getElementById('area1'); //div 요소 객체
+            console.log(area1);
+            console.dir(area1);
+
+            //선택된 요소의 속성들에 접근해서 값을 가져온다거나 값을 변경 가능
+            //속성에 접근하고자 한다면 => 선택된요소객체.속성명
+            area1.innerHTML+="아이디로 접근 성공!<br>";
+
+            //선택된 요소에 스타일 변경
+            area1.style.backgroundColor="pink";
+            area1.style.color='red';
+            area1.style.width='100px';
+            area1.style.height='300px';
+            //개발자도구로 확인 시 인라인 방식으로 스타일이 적용된것을 볼 수 있음
+        }
+    </script>
+    <br><br>
+    <div id="area2" class="area" style="background-color:red;"></div>
+    <button onclick="accessId2();">클릭마다 색 변경</button>
+    <script>
+        function accessId2(){
+            const area2=document.getElementById('area2');
+
+            //console.log(area2);
+            //console.log(area2.style.backgroundColor);
+
+            //자바스크립트에서는 문자열간의 동등비교가 ==으로 이루어진다
+            if(area2.style.backgroundColor=='red'){
+                area2.style.backgroundColor='orange';
+            }else if(area2.style.backgroundColor=='orange'){
+                area2.style.backgroundColor='yellow';
+            }else if(area2.style.backgroundColor=='yellow'){
+                area2.style.backgroundColor='green';
+            } else if (area2.style.backgroundColor == 'green') {
+                area2.style.backgroundColor = 'blue';
+            } else if (area2.style.backgroundColor == 'blue') {
+                area2.style.backgroundColor = 'navy';
+            } else if (area2.style.backgroundColor == 'navy') {
+                area2.style.backgroundColor = 'purple';
+            } else if (area2.style.backgroundColor == 'purple') {
+                area2.style.backgroundColor = 'red';
+            }
+        }
+    </script>
+    <br><br>
+    <h3>2) 태그명으로 가져오기</h3>
+    <!--ul>li{목록$}*5-->
+    <ul>
+        <li>목록1</li>
+        <li>목록2</li>
+        <li>목록3</li>
+        <li>목록4</li>
+        <li>목록5</li>
+    </ul>
+    <button onclick="acessTagName();">태그명으로 접근</button>
+
+    <script>
+        function acessTagName(){
+            //태그명으로 요소에 접근
+            //document.getElementsByTagName("태그명");
+            //=>선택된 여러개의 요소객체들은 배열에 담겨서 반환
+            // (자바스크립트에서의 배열은 []로 표현)
+            let list=document.getElementsByTagName('li'); // [li요소객체, li요소객체, ...]
+
+            console.log(list);
+            console.log('배열의 크기(선택된 li 요소의 갯수): '+list.length);
+
+            list[4].innerHTML='안녕하세요';
+            list[5].innerHTML='반갑습니다';
+
+            let blueColor=50;
+            //인덱스 4~8번 순차적으로 접근
+            for(let i=4; i<list.length; i++){
+                list[i].innerHTML='안녕하세요'+(i+1);
+
+                //list[i].style.backgroundColor='rgb(130,220,50)';
+                list[i].style.backgroundColor='rgb(130, 200, '+blueColor+')';
+                blueColor+=50;
+            }
+        }
+    </script>
+    <br><br>
+    <h3>3) name 속성명으로 가져오기</h3>
+    <form action="test.do" method="get">
+        <fieldset>
+            <legend>취미</legend>
+            <input type="checkbox" name="hobby" value="game" id="game">
+            <label for="game">게임</label>
+            <input type="checkbox" name="hobby" value="music" id="music">
+            <label for="music">음악</label>
+            <input type="checkbox" name="hobby" value="hiking" id="hiking">
+            <label for="hiking">등산</label>
+            <input type="checkbox" name="hobby" value="reading" id="reading">
+            <label for="reading">독서</label>
+            <input type="checkbox" name="hobby" value="movie" id="movie">
+            <label for="movie">영화</label>
+            <input type="checkbox" name="hobby" value="sport" id="sport"><label for="sport">운동</label>
+        </fieldset>
+    </form>
+    
+    <br>
+    <div id="area3" class="area"></div>
+    <button onclick="accessName();">name으로 접근</button>
+
+    <script>
+        function accessName(){
+            //name 속성값으로 요소를 가져올 때
+            //document.getElementsByName("name속성");
+            //=>선택된 요소 객체들이 배열에 담겨서 반환
+            let hobby= document.getElementsByName('hobby');
+            //[input요소객체, input요소객체, input요소객체, ...]
+            
+            console.log(hobby);
+
+            //체크된 요소만 div에 찍어보기
+            let checkedItem="";
+
+            for(let i=0; i<hobby.length; i++){
+                if(hobby[i].checked){
+                    checkedItem+=hobby[i].value+"<br>";
+                }
+            }
+
+            //console.log(checkedItem);
+            //const divEl=document.getElementById('area3');
+            //divEl.innerHTML=checkedItem;
+            document.getElementById('area3').innerHTML=checkedItem;
+
+        }
+    </script>
+    <br><br>
+    <h3>4) 클래스명으로 가져오기</h3>
+    <div class="test"></div>
+    <p class="test"></p>
+    <ul class="test">
+        <li></li>
+        <li></li>
+    </ul>
+    <pre class="test test1"></pre>
+    <button onclick="accessClass();">클래스로 접근</button>
+
+    <script>
+        function accessClass(){
+            //class 속성으로 요소를 가져올 때
+            //document.getElementsByClassName('class');
+            //=>선택된 요소 객체들이 배열에 담겨서 반환
+            let arr=document.getElementsByClassName('test');
+
+            console.log(arr);
+
+            //일반 for문
+            /*
+            for(let i=0; i<arr.length; i++){
+                console.log(arr[i]);
+            }
+            */
+
+            //for in 문
+            //for(변수선언문 in 배열명)
+            //=>반복이 돌때마다 해당 변수에 배열의 인덱스가 담김
+            for(let i in arr){
+                console.log(arr[i]);
+            }
+        }
+    </script>
 </body>
 </html>

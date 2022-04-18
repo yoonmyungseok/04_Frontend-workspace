@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 1</title>
+    <style>
+        .area{
+            background-color: lightgray;
+            border: 1px solid black;
+        }
+        .small{
+            height: 200px;
+        }
+        .big{
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>객체</h1>
+    <!--
+        자바스크립트에서의 객체는 여러개의 값들을 묶어서 저장하는건 배열과 같은 개념이지만,
+        그 여러개의 값을 저장할 때, 값만 제시하는 것이 아니라 key:value 형태로 제시한다
+        =>자바에서의 HashMap과 유사한 개념
+    -->
+    <h3>* 객체 선언 및 호출</h3>
+    <p>
+        객체는 중괄호 {}를 이용하여 생성하고, <br>
+        중괄호 안에 이 객체에 필요로 하는 속성들을 정의함<br>
+        속성명 : 속성값 의 형태로 정의함 (키:밸류) <br>
+        속성값으로는 모든 자료형의 값을 담을 수 있음
+    </p>
+    <pre>
+        [표현법]
+        var 변수명={
+            속성명:속성값, 
+            속성명:속성값, 
+            ...
+        };
+    </pre>
+    <button onclick="test1();">실행확인</button>
+
+    <div id="area1" class="area big"></div>
+    <script>
+        function test1(){
+            //배열: 인덱스, 자료형상관없이 다 담을 수 있음, 크기제약x
+            var arr=['Dry Mango',4000,'pickle',['mango','sugar']];
+
+            //객체: 인덱스대신 키값, 자료형상관없이 다 담을 수 있음, 크기제약x
+            var product={
+                pName:'Dry Mango',
+                price:4000,
+                kind:'pickle',
+                ingredient:['mango','sugar']
+            };
+            //배열보다 객체가 좀 더 보기 편함(키값이 명시적으로 작성되어있으므로)
+            //자바스크립트에서의 객체==자바에서의 HashMap
+            console.log(arr);
+            console.log(product);
+            console.log(typeof (product));
+            
+            var area1=document.getElementById('area1');
+            area1.innerHTML='product: '+product+'<br>';
+            //객체명만 제시시 [object Object]로 출력이 된다
+
+            //해당 객체 내부의 각 속성에 접근하는 방법
+            //방법1. . 을 이용하는 방법: 객체명.속성명
+            area1.innerHTML+='<b>방법1. 객체명.속성명으로 접근하기 <b><br>';
+            area1.innerHTML+='product.pName: '+product.pName+'<br>';
+            area1.innerHTML +='product.price: '+product.price+'<br>';
+            area1.innerHTML+='product.kind'+product.kind+'<br>';
+            area1.innerHTML+='product.ingredient'+product.ingredient+'<br>';
+            area1.innerHTML+='product.ingredient[0]: '+product.ingredient[0]+'<br>';
+            area1.innerHTML+='product.ingredient[1]:'+product.ingredient[1]+'<hr>';
+
+            //방법 2. 대괄호를 이용하는 방법 객체명['속성명']
+            area1.innerHTML+="<b>방법 2. 객체명['속성명']으로 접근하기 </b><br>";
+            area1.innerHTML+="product['pName']: "+product["pName"]+"<br>";
+            area1.innerHTML+="product['price']: "+product["price"]+"<br>";
+            area1.innerHTML+="product['kind']: "+product["kind"]+"<br>";
+            area1.innerHTML+="product['ingredient']: "+product["ingredient"]+"<br>";
+            area1.innerHTML+="product['ingredient'][2]: "+product["ingredient"][0]+"<br>";
+            area1.innerHTML+="product['ingredient'][1]: "+product["ingredient"][1]+"<br>";
+            }
+    </script>
+    <br>
+    <h3>* 객체 생성 특이 케이스(속성명 제시시 반드시 문자열 형태로 제시해야되는 케이스)</h3>
+    <button onclick="test2();">실행확인</button>
+    <div id="area2" class="area small"></div>
+
+    <script>
+        function test2(){
+            //속성명을 작성시 공백이나 특수문자를 포함시켜서 작성시킨다면?
+            var user={
+                "user name":"홍길동",
+                "age!!":20
+            };
+            //=>공백이나 특수문자가 속성명에 포함될경우 문자열 형태로 제시 가능
+            
+            //console.log(user);
+
+            var area2=document.getElementById('area2');
+            // . 을 이용하는 방법 => 객체명.속성명
+            //area2.innerHTML="user name: "+user.'user name'+"<br>";
+            //area2.innerHTML+="age!!: "+user.'age!!'+"<br>";
+            //위의 특이케이스의 경우에는 . 을 이용하는 방식으로 속성명에 접근 불가능하다
+
+            // []를 이용하는 방법=> 객체명["속성명"]
+            area2.innerHTML+="user name: "+user['user name']+"<br>";
+            area2.innerHTML+="age!! : "+user['age!!']+"<br>";
+            //위의 특이케이스의 경우네는 []를 이용하는 방법만 가능하다
+        }
+    </script>
+    <br>
+    <h3>* 객체에서의 반복문</h3>
+    <p>
+        객체가 가지고 있는 모든 속성들에 대해서 순차적으로 접근하고자 한다면 반복문을 제시<br>
+        단, 단순 for loop 문으로는 불가하고, for in 문만 사용 가능함
+    </p>
+    <!--
+        배열에서의 for in 문
+        for(var i in 배열명){
+            //i에 매번 배열의 인덱스가 0에서부터 마지막까지 순차적으로 담긴다
+        }
+
+        객체에서의 for in 문
+        for(var key in 객체명){
+            //key에 매번 객체의 키값(속성명)이 담김
+        }
+    -->
+    <button onclick="test3();">실행확인</button>
+    <div id="area3" class="area small"></div>
+
+    <script>
+        function test3(){
+            var area3=document.getElementById('area3');
+
+            //배열의 경우 for in 문
+            var arr=['김갑생',10,true];
+
+            for(var i in arr){
+                area3.innerHTML+=arr[i]+"<br>";
+            }
+            //in 뒤에 배열을 제시했을 때 
+            //반복문 돌 때 마다 0에서부터 마지막 인덱스까지의 인덱스수가 앞의 변수에 담김
+
+            //객체의 경우 for in 문
+            var game={
+                title:"오버워치",
+                price:35000,
+                language:"한국어지원",
+                supportOS: ['window32','window64'],
+                service: true
+            };
+
+            for(var key in game){
+                //key="title","price","language","supportOS","service"
+
+                // .을 이용하는 방법 => 객체명.속성명
+                //area3.innerHTML+=key+":"+game.key+"<br>";
+
+                //진짜 game 객체의 key라는 속성명이 있나 찾아가는 꼴이 됨(당연히 없으니까 undefined)
+                //=>for in 문 내에서는 불가함
+                
+                //[]를 이용하는 방법=>객체명['속성명']
+                area3.innerHTML+=key+":"+game[key]+"<br>";
+                //=>for in 문 내에서 가능함
+            }
+            //in 뒤에 객체 제시시
+            //반복문이 돌때마다 해당 객체의 속성명들이 앞쪽의 변수에 담김
+        }
+    </script>
+    <h3>* 객체의 메소드 속성</h3>
+    <p>
+        객체의 속성 중 함수 자료형인 속성을 메소드라고 부른다<br>
+        속성명: 함수 =>객체명.속성명
+    </p>
+    <button onclick="test4();">실행확인</button>
+    <div id="area4" class="area small"></div>
+
+    <script>
+        function test4(){
+            var area4=document.getElementById('area4');
+
+            var name ='홍길동';
+
+            var dog={
+                name:'토토',
+                kind:'푸들',
+                eat: function(food){
+                    //익명함수로 작성 => 객체명.속성명이 메소드명으로 잡힘
+                    //area4.innerHTML+='eat 메소드가 호출되었습니다';
+                    //area4.innerHTML+=food;
+
+                    //푸들 종류인 토토가 사과를 먹고 있어요.
+                    area4.innerHTML+= this.kind+" 종류인 "+this.name+"가 "+food+"를 먹고있어요";
+                    //메소드 속성 내에 같은 객체 내의 다른 속성을 호출하고자 할 경우에는 this. 을 붙여서 제시
+                    //속성명만 제시할 경우에는 변수명으로 인식되기 때문에 undefined가 찍힘
+                    //만약, 같은 이름의 변수가 이미 같은 함수 범위 내에서 존재할 경우 그 변수에 담긴 내용이 찍힘
+                }
+            };
+            dog.eat('사과');
+        }
+    </script>
+    <br>
+    <h3>* in과 with 키워드</h3>
+    <p>
+        in: 객체 내에 해당 속성이 있는지 확인해주는 키워드 <br>
+        [표현법] <br>
+        "속성명" in 객체명 <br>
+        => 해당 속성명이 존재한다면 true 반환 / 존재하지 않으면 false 반환<br><br>
+        with: 객체명을 제시하는것을 생략할 수 있는 키워드 (코드를 줄여주는 키워드)<br>
+        [표현법] <br>
+        with(객체명){ <br>
+            속성명만 작성해도 알아서 해당 객체명으로 찾아감 <br>
+        }
+    </p>
+</body>
+</html>

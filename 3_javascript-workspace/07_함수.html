@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수</title>
+    <style>
+        .area{
+            width: 500px;
+            height: 100px;
+            background-color: lightgray;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>함수 (function)</h1>
+    <h3>* 선언적 함수(함수명이 있을 경우)</h3>
+    <pre>
+        [표현법]
+        function 함수명(매개변수, 매개변수, ...){
+
+            해당 함수 호출 시 실행할 소스코드들;
+
+            return 결과값;
+        }
+        -매개변수가 없는 경우 매개변수를 생략 가능
+        -반환할 결과값이 없는 경우 return 결과값; 구문 생략 가능
+    </pre>
+    <button onclick="test1();">실행확인</button>
+    <div id="area1" class="area"></div>
+    <script>
+        function test1(){
+            document.getElementById('area1').innerHTML+='test1() 함수 실행됨 <br>';
+        }
+    </script>
+    <br>
+    <h3>* 익명 함수(함수명이 없을 경우)</h3>
+    <pre>
+        [표현법]
+        변수=function (매개변수명, 매개변수명, ...){
+            소스코드;
+        };
+        
+        -특정 변수나 속성에 대입되는 함수 제시시 주로 사용됨
+        (주로 이벤트가 발생되었을 때 실행할 코드를 작성할 용도로 쓰임==이벤트핸들러함수)
+    </pre>
+    <button id="btn2">실행확인</button>
+    <div id="area2" class="area"></div>
+    <script>
+        //버튼 요소를 가져오기
+        var btn2=document.getElementById('btn2');
+
+        console.dir(btn2); //onclick 속성이 null
+
+        //가져온 버튼 요소에 onclick 속성 추가(대입)
+        btn2.onclick=function(){ //이벤트 속성에 대입되는 function==이벤트핸들러함수
+            document.getElementById('area2').innerHTML+='이벤트핸들러를 통해서 실행됨 <br>';
+        };
+        console.log(btn2.onclick); //함수 내용물이 찍힘
+    </script>
+    <hr>
+    <h2>함수의 매개변수</h2>
+    <button onclick="test3('안녕하세요');">실행확인</button>
+    <button onclick="test3(10);">실행확인</button>
+    <button onclick="test3([1,2,3,]);">실행확인</button>
+    <button onclick="test3(true);">실행확인</button><br>
+    <button onclick="test3(prompt('이름을입력하세요'));">실행확인</button>
+    <button onclick="test3('hi','반갑습니다');">실행확인</button>
+    <!--
+        정의해둔 매개변수 개수보다 더 많이 전달하는게 가능 (즉, 오류없음, 문제없음)
+        단, 개수가 초과될 경우 초과된 전달값은 무시됨
+    -->
+    <button onclick="test3();">실행확인</button>
+    <!--
+        정의해둔 매개변수 갯수보다 더 적게 전달하는게 가능(즉, 오류없음, 문제없음)
+        단, undefined로 뜸
+    -->
+    <button onclick="test3(undefined);">실행확인</button>
+    <div id="area3" class="area"></div>
+    
+    <script>
+        function test3(value){//매개변수 제시시 자료형 지정x, var 제시x=>변수명만 작성한다
+            document.getElementById('area3').innerHTML=value;
+        }
+    </script>
+    <br>
+    <h3>* 매개변수 관련 arguments 배열</h3>
+    <p>함수 호출시 전달되는 값은 내부적으로 arguments 라는 배열에 담김<br>
+    *arguments: 모든 함수마다 내부적으로 하나씩 존재하는 배열 객체
+    </p>
+    <button onclick="test4(11,12,1,5,7);">실행확인</button>
+    <div id="area4" class="area"></div>
+
+    <script>
+        function test4(){
+            //console.log(arguments);
+            //console.log(arguments[0]);
+
+            //arguments 배열의 모든 값들을 더해서 div에 출력
+            var sum=0;
+
+            for(var i=0; i<arguments.length; i++){
+                sum+=arguments[i];
+            }
+            document.getElementById('area4').innerHTML+='총합'+sum+'<br>';
+            document.getElementById('area4').innerHTML+='평균'+(sum/arguments.length)+'<hr>';
+        }
+    </script>
+    <br>
+    <h3>* 매개변수가 있는 함수에 this 관련 전달하기</h3>
+    <!--
+        this: 해당 이벤트를 당하는 요소
+        예)클릭 이벤트 발생 시 => this:눌림을 당하는 버튼
+        화면이 띄워지는 load 이벤트 발생 시 => this:화면을 띄움 당하는 window
+    -->
+    <button onclick="test5(this);">버튼1</button><!--해당 버튼 요소 자체가 넘겨짐-->
+    <button onclick="test5(this.innerHTML);">버튼2</button>
+    <!--this.innerHTML을 넘길 경우 시작태그와 종료태그 사이의 문자열 값이 전달됨-->
+
+    <input type="button" value="버튼3" onclick="test5(this.value);">
+    <!--input type="button"에서 this.value를 넘길경우 버튼에 쓰인 문구가 전달됨-->
+    <button id="btn" onclick="test5(this.id);">버튼4</button>
+    <!--해당 버튼 요소의 id 값이 넘겨짐-->
+    <script>
+        function test5(a){
+            console.log(a);
+        }
+    </script>
+    <hr>
+    <h2>함수의 리턴</h2>
+    <h3>* 일반적인 값을 리턴하는 경우</h3>
+    <button onclick="test6();">실행하기</button>
+
+    <div id="area6" class="area"></div>
+    <script>
+    function test6(){
+        var random=ran();
+        document.getElementById('area6').innerHTML+='랜덤값: '+random+"<hr>";
+    }
+    function ran(){
+        //1~100사이의 랜덤값 중에서 하나를 구해서 반환해주는 함수
+        var random=Math.random()*100+1;
+
+        return random;
+    }
+    </script>
+    <br>
+    <h3>* 익명 함수를 리턴하는 경우</h3>
+    이름: <input type="text" id="userName">
+    <button onclick="test7();">실행확인</button>
+
+    <script>
+        //사용자로부터 이름을 입력받아서 콘솔로 출력, alert로 출력
+        function test7(){
+            var name=document.getElementById('userName').value;
+
+            console.log(name)
+            //alert(name);
+            return function(){
+                alert(name+'님 환영 합니다');
+            };
+            //익명함수를 리턴해버리면
+            //해당 함수를 호출했던 곳의 코드로써 함수의 정의부분이 들어가기 때문에
+            //함수가 정의만되고 실행은 안됨
+            //=>즉, 익명함수를 리턴과 동시에 실행하고자 한다면
+            //함수 호출 시 ()를 하나 더 붙여서 호출해야 한다
+        }
+    </script>
+</body>
+</html>

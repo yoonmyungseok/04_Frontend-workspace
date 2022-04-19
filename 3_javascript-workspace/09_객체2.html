@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>객체 2</title>
+    <style>
+        .area{
+            background-color: lightblue;
+            border: 1px solid black;
+            height: 250px;
+        }
+    </style>
+</head>
+<body>
+    <h1>객체 2</h1>
+    <h3>* 객체 배열을 사용한 다량의 데이터 관리</h3>
+    <button onclick="test1();">실행확인</button>
+    <div id="area1" class="area"></div>
+    <script>
+        function test1(){
+            var area1=document.getElementById('area1');
+            
+            //테스트를 위한 학생 객체들 생성
+            var student0={name:'김갑생',java:100,oracle:90,html:90,css:60};
+            var student1={name:"김말똥",java:60,oracle:80,html:80,css:70};
+            var student2={name:"홍길동",java:70,oracle:80,html:100,css:50};
+            var student3={name:"이순신",java:90,oracle:90,html:90,css:90};
+
+            //빈 학생 배열 생성
+            var students=[];
+
+            //push
+            students.push(student0);
+            students.push(student1);
+            students.push(student2);
+            students.push(student3);
+
+            //console.log(students);
+            //console.log(students[0]);
+
+            //javascript 시험 후 점수 추가
+            //총점 구하는 함수, 평균 구하는 함수
+            for(var i in students){
+                students[i].javascript=100;
+                students[i].getSum=function(){
+                    return this.java+this.oracle+this.html+this.css+this.javascript;
+                }
+                students[i].getAvg=function(){
+                    return this.getSum()/5;
+                }
+            }
+            console.log(students);
+            
+            //div에 출력
+            for(var i in students){
+                //area1.innerHTML+="이름: "+students[i].name+", 총점: "+students[i].getSum()+", 평균: "+students[i].getAvg()+"<br>";
+                with(students[i]){
+                    area1.innerHTML += "이름: " + name + ", 총점: " + getSum() + ", 평균: " + getAvg() + "<br>";
+                }
+            }
+
+        }
+    </script>
+    <hr>
+    <h3>* 생성자 함수</h3>
+    <p>
+        new 키워드를 이용해서 객체를 생성할 수 있는 함수를 의미<br>
+        -호출 시 new 생성자함수명();<br>
+        -리턴값은 해당 객체를 통째로 완성해서 리턴해줌<br>
+        -함수명 제시시 첫글자는 대문자로 <br>
+        (자바에서의 클래스와 같은 역할=>내가 앞으로 만들 객체의 틀을 정의)
+    </p>
+    <button onclick="test2();">실행확인</button>
+    <div id="area2" class="area"></div>
+
+    <script>
+        function test2(){
+            var area2=document.getElementById('area2');
+            //우선적으로 학생들의 객체를 각각 만들어줌 => {}에 직접 작성
+            //=>이번에는 생성자 함수를 이용해서 균일한 틀을 먼저 정의 후 호출해서 균일하게 생성
+            var student0=new Student("홍길동",100,70,90,80,30);
+            var student1=new Student("김말똥",80,90,70,60,50);
+            var student2=new Student("김갑생",90,80,80,70,40);
+
+            //학생들의 정보를 담는 배열
+            var students=[student0, student1, student2];
+
+            console.log(students);
+            console.log(students[0]);
+            console.log(students[0].name);
+
+            for(var i=0; i<students.length; i++){
+                area2.innerHTML+=students[i];
+            }
+        }
+
+        //학생 객체를 생성할 수 있게끔 해주는 생성자 함수
+        //첫 글자는 대문자, return 값은 학생 한명의 정보를 담고있는 객체
+        //초기화할 값들을 매개변수로 정의(자바에서의 매개변수가 있는 생성자와 동일)
+        function Student(name, java, oracle, html, css, javascript){
+            //각 속성에 전달받은 값들을 정의해서 대입
+            //빈 this 객체에 각 속성들을 추가해줌
+
+            //일반 속성 정의
+            //자바의 클래스에서의 필드와 유사한 역할
+            this.name=name;
+            this.java=java;
+            this.oracle=oracle;
+            this.html=html;
+            this.css=css;
+            this.javascript=javascript;
+            
+            //메소드 속성 정의
+            this.getSum=function(){
+                return this.java+this.oracle+this.html+this.css+this.javascript;
+            }
+            this.getAvg=function(){
+                return this.getSum()/5;
+            }
+            this.toString=function(){
+                return "이름: "+this.name+", 총점: "+this.getSum()+", 평균: "+this.getAvg()+"<br>";
+            }
+
+            //return this; //학생 한명의 정보가 리턴됨(생략)
+        }
+    </script>
+    <hr>
+    <!-- Date -->
+    <h3>* Date 내장 객체</h3>
+    <button onclick="test3();">실행확인</button>
+    <div id="area3" class="area"></div>
+    <script>
+        function test3(){
+            var area3=document.getElementById('area3');
+
+            //테스트용 Date 객체 생성
+            //new Date 생성자 함수 호출
+            var date1=new Date(); //현재 날짜 및 시간
+
+            area3.innerHTML="Date(): "+date1+"<br>";
+            
+            //우리가 원하는 날짜로 세팅 가능
+            //2021년 2월 15일로 세팅
+            var date2=new Date(2021,2-1,15);//년,월-1, 일
+            //시,분,초는 자동으로 0으로 셋팅됨
+            //2월을 제시했지만 3월로 찍힘(월의 경우 내부적으로 +1이 됨)
+            area3.innerHTML+="Date(년,월,일): "+date2+"<br>";
+
+            //2021년 2월 15일에 시간까지 셋팅하려면?
+            var date3=new Date(2021,2-1,15,17,30,23);
+            //년,월-1,일,시,분,초
+            area3.innerHTML+="Date(년,월,일,시,분,초): "+date3+"<br>";
+
+            //1초(seconds)==1000밀리세컨초(ms)
+            //밀리세컨초 단위까지 셋팅
+            //5000ms==5s
+            var date4=new Date(2021,2-1,15,17,30,23,5000);
+
+            area3.innerHTML+="Date(년,월,일,시,분,초,밀리세컨초):"+ date4+"<br>";
+            //23초에 밀리세컨초 5000ms가 더해져서 28초가 된 걸 확인 가능함
+
+            //현재날짜 기준으로(date1에 담겨있음)
+            //년도만 뽑아내고 싶다면?
+            area3.innerHTML+="년도:"+date1.getFullYear()+"<br>";
+            //월만 알아내고 싶다면?
+            area3.innerHTML+="월: "+(date1.getMonth()+1)+"<br>";
+            //일만 알아내고 싶다면?
+            area3.innerHTML+="일: "+date1.getDate()+"<br>";
+            //요일만 알아내고 싶다면? 
+            area3.innerHTML+="요일: "+date1.getDay()+"<br>"; //숫자가 나옴
+
+            //요일 테스트
+            //var testDate=new Date(2022,4-1,17);
+            //area3.innerHTML+=testDate.getDay();//일요일의 경우 숫자 0으로 나오는걸 확인 가능
+
+            //추가적으로
+            //시: getHours(), 분: getMinutes(), 초: getSeconds()
+
+            //종강일 디데이 구하기
+            var end=new Date(2022,7-1,21); //2022년 7월 21일
+            var now=new Date(); //현재 날짜
+
+            area3.innerHTML+="종강일 디데이: "+(end-now)+"<br>";
+            //현재 날짜로 부터 종강날짜까지 몇 밀리세컨초가 남았는지 알려주고 있음
+
+            //단위 환산
+            //1s==1000ms
+            //1m=60s==60*1000ms
+            //1h==60m==60*60s==60*60*1000ms
+            //1d==24h==24*60m==24*60*60s=24*60*60*1000ms
+            var dDay=(end-now)/(24*60*60*1000);
+
+            alert("종강까지 "+Math.ceil(dDay)+"일 남았습니다"); //소수점 올림
+
+        }
+    </script>
+</body>
+</html>

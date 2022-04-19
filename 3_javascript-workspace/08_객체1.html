@@ -217,5 +217,132 @@
             속성명만 작성해도 알아서 해당 객체명으로 찾아감 <br>
         }
     </p>
+    이름: <input type="text" id="name"><br>
+    국어: <input type="text" id="kor"><br>
+    수학: <input type="text" id="math"><br>
+    영어: <input type="text" id="eng"><br>
+    <button onclick="test5();">실행확인</button>
+
+    <div id="area5" class="area big"></div>
+    <script>
+        function test5(){
+            var area5=document.getElementById('area5');
+            //위에서 입력받은 학생 정보를 추출 
+            var name=document.getElementById('name').value;
+            var kor=Number(document.getElementById('kor').value);
+            var math=Number(document.getElementById('math').value);
+            var eng=Number(document.getElementById('eng').value);
+
+            //뽑아낸 학생 정보를 가지고 student라는 객체 생성
+            var student={
+                name: name,
+                kor:kor,
+                math:math,
+                eng:eng,
+                toString:function(){
+                    return this.name+", "+this.kor+", "+this.math+", "+this.eng;
+                },
+                getSum: function(){
+                    return this.kor+this.math+this.eng;
+                },
+                getAvg: function(){
+                    return this.getSum()/3;
+                }
+            };
+            //잘만들어졌나 출력
+            area5.innerHTML="student: "+student+"<br>";
+            area5.innerHTML+="총합: "+student.getSum()+"<br>";
+            area5.innerHTML +="평균: "+student.getAvg()+"<br>";
+
+            //"속성명" in 객체명: 해당 객체 내에 해당 속성명이 존재할 경우 true 반환 / 아닐경우 false 반환
+            area5.innerHTML+="name 속성값이 있나?: "+("name" in student)+"<br>";
+            area5.innerHTML +="kor 속성값이 있나?: "+("kor" in student)+"<br>";
+            area5.innerHTML +="math 속성값이 있나?: "+("math" in student)+"<br>";
+            area5.innerHTML +="eng 속성값이 있나?: "+("eng" in student)+"<br>";
+            area5.innerHTML +="toString 속성값이 있나?: "+("toString" in student)+"<br>";
+            area5.innerHTML +="sum 속성값이 있나?: "+("sum" in student)+"<br>";
+            area5.innerHTML +="avg 속성값이 있나?: "+("avg" in student)+"<br>";
+
+            //with: 코드를 줄여주는 키워드
+            //with(객체명){해당객체의 속성명만 작성해도}
+            /*
+            area5.innerHTML +="학생이름: "+student.name+"<br>";
+            area5.innerHTML +="국어점수: "+student.kor+"<br>";
+            area5.innerHTML +="수학점수: "+student.math+"<br>";
+            */
+            with(student){
+               //이 영역 안에서는 적어도 student에 대한 속성명을 작성할 때 
+               //student.속성명 이런식으로 매번 작성 안해도 된다(즉, student. 이 생략 가능)
+                area5.innerHTML +="학생이름: "+name+"<br>";
+                area5.innerHTML +="국어점수: "+kor+"<br>";
+                area5.innerHTML +="수학점수: "+math+"<br>";
+                area5.innerHTML +="영어점수: "+eng+"<br>";
+                area5.innerHTML +="총점: "+getSum()+"<br>";
+                area5.innerHTML +="평균: "+getAvg()+"<br>";
+            }
+
+        }
+    </script>
+    <br>
+    <h3>* 객체의 속성 추가 및 제거</h3>
+    <button onclick="test6();">실행확인</button>
+    <div id="area6" class="area small"></div>
+    <script>
+        function test6(){
+            var area6=document.getElementById('area6');
+
+            //테스트용 빈 객체를 생성
+            var student={};
+
+            console.log(student);
+            
+            //빈 객체에 속성을 추가
+            //객체명.내가추가할속성명=값;
+            student.name='홍길동';
+            student.hobby=['게임','영화'];
+            student.dream='프로게이머';
+            student.age=20;
+
+            console.log(student);
+
+            student.dream='프로그래머';
+            //객체 내에 중복된 속성이 존재 부락
+            //속성명을 중복 정의한 경우는 덮어 씌워진다. (자바에서 HashMap 때랑 똑같음)
+            //console.log(student.dream);
+
+            with(student){
+                address="서울";
+            }
+
+            console.log(student.address); //undefined
+            //with 키워드를 사용할 경우 속성 추가가 되지 않음
+            
+            //이 시점에서 student의 속성명으로는 name, hobby, dream, age만 있음
+            area6.innerHTML="student: "+student+"<br>"; //[object Object]
+
+            //메소드 속성 추가(toString)
+            student.toString=function(){
+                var str="name : "+this.name+"<br>"
+                        +"hobby: "+this.hobby+"<br>"
+                        +"dream: "+this.dream+"<br>"
+                        +"age: "+this.age+"<br>";
+                return str;
+            };
+            area6.innerHTML+="student: "+student+"<br>";
+            //메소드 속성도 추가 가능함
+
+            //객체로부터 속성 제거
+            //delete(객체명.삭제할속성명);
+            delete(student.hobby);
+            area6.innerHTML+="student: "+ student+"<br>";
+
+            with(student){
+                delete(age);
+            };
+            area6.innerHTML += "student: " + student + "<br>";
+            //with 키워드로 속성명 삭제가 가능함
+            //삭제한 속성값들은 undefined가 됨
+        }
+    </script>
 </body>
 </html>

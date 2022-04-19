@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>window용 객체</title>
+    <style>
+        .area{
+            width:300px;
+            height: 100px;
+            font-size: 50px;
+            color: red;
+        }
+        .small{
+            height: 100px;
+        }
+        .big{
+            height:300px;
+        }
+        .small,.big,.area{
+            background-color: lightgray;
+            border: 1px solid pink;
+        }
+    </style>
+</head>
+<body>
+    <h1>window용 객체</h1>
+    <p>
+        window 객체는 자바스크립트의 최상위 객체이며 크게 BOM과 DOM으로 나뉨<br><br>
+        -BOM(Browser Object Model): 브라우저 창과 관련된 속성들 <br>
+        예) location 객체, screen 객체, navigator 객체, history 객체<br>
+        -DOM(Document Object Model): html 요소와 관련됨
+    </p>
+    <h4>- window.open("url","창이름","창의 특성")</h4>
+    <button onclick="test1();">네이버</button>
+    <script>
+        function test1(){
+            //window.open(); //빈 창이 뜸
+            //open("url","창이름","창의 특성"); //window 생략 가능 
+            //url: 새 창에서 열고자하는 url 주소
+            //창이름: 창이름이 이미 같은게 열려있을 경우 새로 열리지 않고 기존의 창에서 새로고침됨
+            //창의 특성: 새로 열릴 창의 너비, 높이, 툴바, 스크롤바, 상태표시줄 등등
+            //=>브라우저마다 다름
+            //open("http://www.naver.com","ㅋㅋㅋ");
+
+            /*
+                창의 특성
+                =>px
+                width: 창의 너비
+                height: 창의 높이
+                
+                =>yes/no
+                resizable: 창 크기 조절 가능 여부
+                location: 주소창이 보일건지 안보일건지 / 수정가능한지 아닐건지
+                menubar: 메뉴바 보일건지 안보일건지
+                scrollbars: 스크롤바가 보일건지 안보일건지
+                status: 상태표시줄이 보일건지 안보일건지
+                toolbar: 도구모음창이 보일건지 안보일건지
+                
+                여러 속성들을 한번에 지정하고 싶으면
+                "속성=속성값, 속성=속성값, ... "
+            */
+            //open("http://www.naver.com","ㅋㅋㅋ","width=500, height=600");
+            //크롬 vs IE
+            //공통점: 주소창 수정 안됨, toolbar 없음, 상태표시줄 없음, 메뉴바 없음
+            //크롬: 스크롤바 있음, resizable 가능
+            //iE: 스크롤바 없음, resizable 불가능
+            
+            open("http://www.naver.com", "ㅋㅋㅋ", "width=500, height=600, resizable=no,location=yes, menubar=yes,scrollbar=yes, status=yes, toolbar=yes");
+            //크롬: 창의 특성을 지정하더라도 거의 적용되지 않음
+            //IE: 모든 속성이 다 적용됨
+        }
+    </script>
+    <br>
+    <h3>* window 객체의 timer 관련 메소드들</h3>
+    <h4>-window.setTimeout(실행할익명함수, 밀리세컨초)</h4>
+
+    <button onclick="test2();">실행확인</button>
+
+    <script>
+        function test2(){
+            //3초 후에 alert가 뜨게끔
+            /*
+            setTimeout(function(){
+                alert("하이!");
+            },3000);
+            */
+            
+            //3초 후에 현재 페이지가 닫히게끔
+
+            var newWindow=window.open(); //새로 열린 창의 window 객체 생성(리턴값)
+
+            newWindow.alert('3초 후에 이 페이지는 닫힙니다');
+
+            setTimeout(function(){
+                //newWindow 창을 닫기
+                newWindow.close();
+            },3000);
+            //setTimeout: 내가 제시한 일정 시간 후에 해당 익명함수를 "단 한번"만 실행
+        }
+    </script>
+
+    <br>
+    <h4>-window.setInterval(실행할익명함수, 밀리세컨초)</h4>
+    <button onclick="test3();">실행확인</button>
+    <div id="area1" class="area"></div>
+
+    <script>
+        function test3(){
+            var area1=document.getElementById('area1');
+            //var count=1;
+
+
+            setInterval(function(){
+                //area1.innerHTML+="ㅋ";
+                //area1.innerHTML=count++;
+                
+                //실시간으로 현재 시간을 출력
+                var now=new Date();
+                var hour=now.getHours();
+                var min=now.getMinutes();
+                var sec=now.getSeconds();
+
+                //1~9까지의 숫자를 표현할 때는 01~09로 바꿔주기
+                //시간
+                if (hour > 12) {
+                    hour = hour - 12; //13시=>1시로
+                }
+                if(hour<10){
+                    hour="0"+hour; //1시=>01시
+                }
+                //분
+                if(min<10){
+                    min="0"+min; //1분=>01분으로
+                }
+                //초
+                if(sec<10){
+                    sec="0"+sec; //1초=>01초로
+                }
+                
+                area1.innerHTML=hour+" : "+min+" : "+sec+"<br>";
+
+            },1000);
+
+            //setInterval: 내가 지정한 시간 간격마다 "매번" 함수를 실행
+        }
+    </script>
+    <br>
+    <hr>
+    <h1>* BOM(Browser Object Model)</h1>
+    <h3>location 객체</h3>
+    <p>
+        브라우저의 주소창과 관련된 객체
+    </p>
+
+    <button onclick="console.log(location);">실행확인</button>
+    <br><br>
+
+    <!--location 객체의 href 속성: 주소창의 주소값이 그대로 들어감 -->
+    <a href="http://www.naver.com">네이버로 이동</a>
+    <!-- a 태그는 애초에 클릭시 요청할 url을 작성할 수 있는 href 속성을 제공함 -->
+
+    <br>
+
+    <button onclick="location.href='http://www.naver.com';">네이버로 이동</button>
+    <!--굳이 a 태그가 아니더라도 url 이동을 할 수 있음-->
+    <br>
+
+    <label onclick="location.href='http://www.naver.com';">네이버로 이동</label>
+    <br><br>
+
+    <!--location 객체의 assign, replace, reload 속성의 값들은 함수이다-->
+    <button onclick="location.assign('http://www.google.com');">구글로 이동</button>
+    <br>
+    <button onclick="location.replace('http://www.google.com');">구글로 이동</button>
+    <!--replace 메소드로 이동한 경우에는 뒤로가기를 사용할 수 없음-->
+    <br><br>
+
+    <button onclick="location.href=location.href;">새로고침</button>
+    <br>
+    <button onclick="location.reload();">새로고침</button>
+    <!--현재 페이지의 위치가 그대로 유지되면서 새로고침됨-->
+    <br><br>
+
+
+    <h3>screen 객체</h3>
+    <button onclick="console.log(screen);">screen 객체 확인</button>
+    <!--모니터 해상도에 따라 가로, 세로, 해상도 등의 값이 다 다르다 (주로 퍼블리셔들이 사용하는 속성)-->
+
+    <h3>navigator 객체</h3>
+    <button onclick="console.log(navigator);">navigator 객체 확인</button>
+    <!--브라우저 자체에 대한 정보(제조사, 버전, 종류, ...)-->
+
+    <h3>history 객체</h3>
+    <button onclick="console.log(history);">history 객체 확인</button>
+    <!--브라우저 창으로 웹사이트의 열람 이력을 확인 가능-->
+
+    <hr>
+    <h1>* DOM (Document Object Model)</h1>
+    <p>
+        HTML에 있는 각각의 태그들을 노드(Node)라고 한다. <br>
+        -요소노드(Element Node): 태그 그 자체만을 의미<br>
+        -텍스트노드(Text Node): 시작태그와 종료태그 사이의 기록되는 내용들 <br><br>
+
+        텍스트노드가 존재하는 요소(시작태그와 종료태그가 한쌍으로 이루어져있는 요소들)
+        :div, a, p, pre, ... <br>
+        텍스트노드가 존재하지 않는 요소(시작태그로만 이루어져있는 요소들)
+        :img, input, br, ... <br> 
+    </p>
+    
+    <h3>* 노드 생성과 관련된 메소드</h3>
+    <h4>-텍스트노드가 존재하는 노드를 생성하는 경우(시작태그+종료태그)</h4>
+    <button onclick="test4();">실행확인</button>
+    <div id="area2" class="small"></div>
+    <script>
+        function test4(){
+            //<h3>안녕하세요</h3>
+
+            //동적으로 요소를 만드는 방법1. "문자열"로 만드는 방법
+            //document.getElementById('area2').innerHTML="<h3>안녕하세요</h3>";
+
+            //동적으로 요소를 만드는 방법2. document 객체에서 제공하는 메소드를 통해서 만드는 방법
+            //1) 요소노드 생성: document.createElement("태그명");
+            var elementNode=document.createElement('h3');
+
+            //2) 텍스트노드 생성: document.createTextNode("문구");
+            var textNode=document.createTextNode("안녕하세요");
+            //console.log(elementNode);
+            //console.log(textNode);
+            //console.log('안녕하세요');
+
+            //3) 두 개의 노드를 연결(요소노드의 하위 자식으로 텍스트노드를 붙여주기)
+            //부모요소.appendChild(자식요소);
+            elementNode.appendChild(textNode); //<h3>안녕하세요</h3>
+            console.log(elementNode);
+
+            //4) 화면에 띄우기
+            //document.getElementById('area2').innerHTML=elementNode;
+            //innerHTML 속성에는 단지 문자열만 들어갈 수 있음
+            //div 요소에 자식으로써 출력시키기
+            //appendChilde 메소드를 활용하자
+            document.getElementById('area2').appendChild(elementNode);
+        }
+    </script>
+    <br>
+    <h4>-텍스트노드가 존재하지 않는 요소를 생성하는 경우(시작태그만 존재)</h4>
+    <button onclick="test5();">실행확인</button>
+    <div id="area3" class="big"></div>
+    <script>
+        function test5(){
+            //1) 요소노드 생성: document.createElement("태그명")
+            var img=document.createElement("img"); //<img>
+
+            //2) 만들어진 요소노드에 속성 추가
+            //객체명.만들고자하는속성명=속성값;
+            img.src="https://www.iei.or.kr/resources/images/main/main_renewal/top_logo_s.jpg";
+            //이미지링크 복사
+
+            
+            img.height="100";
+
+            //console.log(img);
+
+            //3) div의 하위 자식요소로써 화면에 출력
+            document.getElementById('area3').appendChild(img);
+
+        }
+    </script>
+    <br>
+    <h4>-노드 삭제</h4>
+    <button onclick="test6();">삭제</button>
+    <script>
+        function test6(){
+            //요소를 삭제할 때 remove 메소드 호출
+            //지우고자하는요소객체.remove();
+
+            //div 요소 객체의 첫번째 자손을 지우도록 remove(맨 앞에것이 지워짐)
+            //document.getElementById('area3').firstChild.remove();
+
+            //div 요소 객체의 마지막 자손을 지우도록 remove(맨 뒤에것이 지워짐)
+            document.getElementById('area3').lastChild.remove();
+        }
+    </script>
+</body>
+</html>

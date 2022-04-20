@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습문제</title>
+    <style>
+        #q1,#q2{
+            width: 100px;
+            height: 100px;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>문제 1. 색상 선택 후 변경 버튼을 클릭하면 색상이 변경되도록 만들어 보시오</h1>
+    <div id="q1"></div>
+    <input type="color" id="color">
+    <button onclick="colorChange();">변경</button>
+    <script>
+        function colorChange(){
+            var color=document.getElementById('color').value;
+            document.getElementById('q1').style.backgroundColor=color;
+        }
+    </script>
+    <hr>
+    <br><br>
+    <h1>문제 2. 버튼에 따른 크기 조절이 가능하게 만들어 보시오</h1>
+    <div id="q2"></div>
+    <button onclick="squareChange('50px');">50x50</button>
+    <button onclick="squareChange('100px');">원본(100x100)</button>
+    <button onclick="squareChange('200px');">200x200</button>
+    <script>
+        function squareChange(value){
+            var square = document.getElementById('q2');
+            square.style.width=value;
+            square.style.height=value;
+            
+        }
+
+    </script>
+    <hr><br><br>
+
+    <h1>간이 계산기 만들기</h1>
+    첫번째 값: <input type="text" id="c1"><br>
+    두번째 값: <input type="text" id="c2"><br>
+    <input type="button" value="+" onclick="calculator(this.value);">
+    <input type="button" value="-" onclick="calculator(this.value);">
+    <input type="button" value="x" onclick="calculator(this.value);">
+    <input type="button" value="/" onclick="calculator(this.value);">
+    <input type="button" value="%" onclick="calculator(this.value);">
+    <br><br>
+    계산결과: <span id="result"></span>
+
+    <script>
+        function calculator(val){
+            var result=document.getElementById('result');
+            var c1=Number(document.getElementById('c1').value);
+            var c2=Number(document.getElementById('c2').value);
+            switch(val){
+                case '+': 
+                    result.innerHTML=c1+c2;
+                    break;
+                case '-':
+                    result.innerHTML=c1-c2;
+                    break;
+                case 'x':
+                    result.innerHTML=c1*c2;
+                    break;
+                case '/':
+                    result.innerHTML=c1/c2;
+                    break;
+                case '%':
+                    result.innerHTML=c1%c2;
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

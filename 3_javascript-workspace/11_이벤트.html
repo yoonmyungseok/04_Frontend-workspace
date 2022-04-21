@@ -58,5 +58,245 @@
             //이벤트 제거(이벤트 속성명에 null 대입)
         }
     </script>
+    <br>
+    <!--그동안 많이 썼던 방식-->
+    <h3>* 인라인 이벤트 모델 방식</h3>
+    <p>
+        요소 내부에 직접적으로 이벤트 속성을 제시해서 실행할 내용을 정의하는 방식 <br>
+        주로 script 태그 내에 정의되어있는 선언적 함수를 호출하는 방식 선호
+    </p>
+    <button onclick="test1();" onmouseenter="this.style.backgroundColor='red';">실행확인</button>
+    <button onclick="document.getElementById('area2').innerHTML+='두 번째 버튼 클릭 <br>';">실행확인</button>
+
+    <!--
+        요소 내부에 직접적으로 이벤트를 기술, 실행도 잘 됨
+        단, 한줄의 내용이 길어지고 복잡하므로 잘 쓰지 않는 방식(두번째 버튼의 예시)
+    -->
+
+    <div id="area2" class="area"></div>
+    <script>
+        function test1(){
+            document.getElementById('area2').innerHTML+='첫 번째 버튼 클릭 <br>';
+        }
+    </script>
+    <br>
+    <h3>* 표준 이벤트 모델 방식(addEventListner)</h3>
+    <p>
+        웹 표준을 지정하는 W3C 단체에서 표준으로 지정한 방식 <br>
+        IE에서는 이벤트가 먹히지 않음, 단 IE9부터는 가능
+    </p>
+    <!--요소 내부에 직접 이벤트 속성을 기술하는 방식이 아님-->
+    <button id="btn3">실행확인</button>
+
+    <script>
+        var btn3=document.getElementById('btn3');
+
+        //btn3.onclick=function(){}; //고전
+        //이벤트를걸고자하는요소객체.addEventListener("이벤트명", 이벤트가발생할때실행할익명함수);
+        btn3.addEventListener('click',function(){
+            alert('표준 이벤트 모델 테스트');
+        });
+        
+        //다른 종류의 이벤트
+        //버튼 안으로 마우스 포인터가 들어가는 순간 발생하는 이벤트 : mouseenter
+        btn3.addEventListener('mouseenter',function(){
+            btn3.style.backgroundColor='red';
+        });
+
+        //버튼 밖으로 마우스 포인터가 빠져나가는 순간 발생하는 이벤트: mouseout
+        btn3.addEventListener('mouseout', function(){
+            btn3.style.backgroundColor='yellow';
+        });
+        
+        //자바스크립트에서는 hover를 지원하지 않음
+        //mouseenter+mouseout==hover
+
+        //이벤트속성명: on이벤트명(고전, 인라인 방식)
+        //이벤트명: 이벤트명(addEventListener 방식)
+    </script>
+    <hr>
+    <h2>2. 현재 이벤트가 발생한 해당 요소 객체에 접근하는 방법</h2>
+    <!--즉, 이벤트를 당한 요소객체를 알아내겠다. =>event target -->
+    <button id="btn4">고전 이벤트 방식</button><!--익명함수를 대입해서-->
+    <button id="btn5">표준 이벤트 방식</button> <!--익명함수를 매개변수로-->
+    <!--시작 태그에 이벤트 속성을 작성하지 않음, 익명함수를 통해서 이벤트를 처리한다-->
+
+    <button onclick="test4(this);">인라인 이벤트 방식</button>
+    <!--시작태그에 이벤트속성을 작성, 선언적 함수 사용하여 이벤트를 처리한다-->
+    
+    <script>
+        //고전 이벤트 방식
+        document.getElementById('btn4').onclick=function(e){ //이벤트 핸들러
+            //방법1) e라는 내부 이벤트 객체를 매개변수로 전달받는 방법
+            //이벤트핸들러(익명함수)는 이름이 없기 때문에 직접 호출이 불가
+            //=>만약에 매개변수를 전달하고 싶더라도 직접 전달이 불가
+            //=>이벤트핸들러는 실행되는 순간 알게모르게 내부적으로 매개변수가 하나 전달됨
+            console.log(e);
+            //MouseEvent==PointerEvent가 전달됨(e에 담겨서)
+            //=>마우스를 사용할 때 발생하는 이벤트
+            //=>이벤트 발생 시 내부적으로 매개변수로 전달됨
+
+            console.log(e.target); //이벤트를 당한 요소객체 자체를 나타냄
+
+            //방법2) 최상위 객체인 window 객체로 알아내는 방법
+            console.log(window.event); //해당 이벤트 객체가 속성값으로 담겨있음
+            console.log(window.event.target); //이벤트를 당한 요소객체 자체를 나타냄
+
+            //방법3) this를 이용한 방법
+            console.log(this); //현재 내가 (function)이 포함된 객체의 이름을 지칭하는 키워드: this
+
+            //현재 이벤트가 발생한 요소객체를 가져오고자 할 때 세 방법 중 하나를 쓰면 됨
+            //e.target==window.event.target==this
+
+            //배경색은 빨강, 글씨색은 흰색으로 변경
+            //window.event.target.style.backgroundColor='red';
+            //e.target.style.backgroundColor='red';
+            this.style.backgroundColor='red';
+            this.style.color='white';
+
+            //문구도 바꿔보자
+            //e.target.innerHTML='버튼클릭됨';
+            //window.event.target.innerHTML='버튼클릭됨';
+            this.innerHTML='버튼클릭됨';
+        };
+
+        //표준 이벤트 모델 방식
+        document.getElementById('btn5').addEventListener('click',function(e){
+
+            //방법1) e라는 내부 이벤트 객체를 매개변수로 전달받는 방법
+            console.log(e); //PointerEvent==MouseEvent
+            console.log(e.target) //btn5 자체가 출력될 것임
+
+            //방법2) 최상위 객체인 window 객체로 알아내는 방법
+            console.log(window.event); //현재 발생한 이벤트 객체의 정보
+            console.log(window.event.target); //btn5 요소 자체
+
+            //방법3) this
+            console.log(this);
+
+            //고전 이벤트 방식, 표준 이벤트 방식에서는
+            //e.target==window.event.target==this 셋 다 가능 하다(둘 다 익명함수를 활용하기 때문)
+        });
+        
+        //인라인 이벤트 모델 방식
+        function test3(e){
+            //방법1) e라는 내부 이벤트 객체를 매개변수로 전달받는 방법
+            console.log(e); //호출 시 매개변수를 넘기지 않았기 때문에 undefined
+            //console.log(e.target); //오류발생
+            //=>선언적 함수를 활용하기 때문에 매개변수 전달방식으로는 요소객체를 알아낼 수 없음
+
+            //방법2) 최상위 객체인 window 객체로 알아내는 방법
+            var target=window.event.target;
+            console.log(window.event);
+            console.log(target);
+            //=>애초에 최상위 객체부터 타고 내려오는 방식이라 적용 가능
+            
+            //방법3) this
+            console.log(this);//window==this(선언적 함수의 경우)
+            //선언적함수는 어딘가에 속성값으로 대입되는 함수가 아니기 때문에
+            //최상위 객체인 window 객체의 속성으로 잡히게 된다(전역변수 처럼)
+            //=>인라인 이벤트 방식에서는 this 방식도 불가
+
+            //인라인 이벤트 방식에서는 window.event.target만 사용 가능하다
+
+        }
+        //선언적 함수에서 this를 쓰고싶을 경우?=>호출 시 매개변수로 this를 넘김
+        function test4(element){
+            console.log(element);
+        }
+    </script>
+    <hr>
+    <h2>3. 태그별 기본적으로 가지고있는 이벤트 제거</h2>
+    <p>
+        기본적으로 이벤트를 가지고 있는 요소 <br>
+        -a 태그: 클릭 시 href 속성에 제시되어 있는 url 주소로 페이지가 이동되는 기본 이벤트를 보유 <br>
+        -form 태그 내의 submit 버튼: 클릭 시 사용자가 입력한 값들을 action 속성에 정의되어있는 url로 
+                                    제출하면서 요청하는 기본 이벤트를 보유
+        <br><br>
+        태그 내에 기본적으로 설정되어있는 이벤트를 제거하는 방법(즉, 기본이벤트가 실행 안되게끔) <br>
+        =>이벤트 핸들러(익명함수) return 값을 false로 리턴하면 기본이벤트가 실행 안됨(제거)
+        
+    </p>
+
+    <!-- a 태그-->
+    <!-- 현재 이 a태그에는 기본이벤트, click 총 두 개의 이벤트가 걸린 상황-->
+    <!--기본이벤트가 있는 요소에 onclick 속성을 부여하면 onclick이 우선적으로 먼저 실행됨-->
+    <!--기본이벤트가 수행되지 않게 하려면 return false;를 적어주면 된다-->
+    <a href="http://www.naver.com" onclick="alert('zzzz'); return false;">네이버로 이동</a>
+    <br>
+    <a href="http://www.naver.com" onclick="return test5();">네이버로 이동</a>
+    <!--return false;를 최종적으로 태그 내에서 작성이 되고 실행되야 기본이벤트 삭제가 적용됨-->
+
+    <script>
+        function test5(){
+            alert('ㅋㅋㅋㅋ');
+            return false; //이 경우에는 기본이벤트 삭제가 되지 않음=> return 함수명();으로 호출해야 적용됨
+        }
+    </script>
+    <br><br>
+    <!--submit 버튼에 대한 기본이벤트 제거 예시-->
+    <form action="test.do" method="get">
+    아이디: <input type="text" name="userId" id="userId"><br>
+    비밀번호: <input type="password" name="userPwd" id="userPwd"> <br>
+    비밀번호 확인: <input type="password" id="checkPwd"><br>
+    <input type="submit" value="회원가입" onclick="return validate();">
+    </form>
+
+    <script>
+        function validate(){//유효성 검사 함수
+            //아이디에 대해서도 검사
+            //영문자 또는 숫자로만 5글자이상 12글자 이하가 맞는지 검사
+            //해당 조건에 만족하지 않는 경우 =>false
+            var userId=document.getElementById('userId').value;
+            /*
+            if(userId.length>=5 && userId.length<=12){ //글자수가 맞았을 경우
+                //각각의 문자들이 영문자 (대, 소문자) 또는 숫자로만 이루어져 있는지?
+                for(var i=0; i<userId.length; i++){
+                    if(userId.charAt(i)>=0&&userId.charAt(i)<=9 
+                    || userId.charAt(i)>="a" && userId.charAt(i)<="z"
+                    || userId.charAt(i)>="A" && userId.charAt(i)<="Z"){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            }else{
+                //글자수가 안맞았을 경우
+            }
+            */
+            
+            //정규표현식을 통해서 유효한 아이디에 해당되는 특정 패턴을 만들어서 검사
+            var regExp=/^[a-zA-Z0-9]{5,12}$/; //정규표현식 객체
+            //1단계: //틀 생성
+            //2단계: /^$/ : ^시작부터 $끝까지
+            //3단계: /^[]$/ : [] 내의 문자 중 하나라도 존재할 경우
+            //4단계: /^[a-z]$/ : 소문자 a에서 z까지 
+            //5단계: /^[a-zA-z]$/ : 대문자 A에서 Z까지
+            //6단계: /^[a-zA-Z0-9]$/ : 숫자0에서부터 9까지
+            //7단계: /^[a-zA-Z0-9]{5,12}$/ : 5글자 이상 12글자 이하인지 글자수 체크
+
+            //패턴 검사
+            //정규표현식 객체에서 제공하는 test 메소드
+            //해당 정규표현식을 만족하는지 묻는 함수(만족하면 true)
+            if(!regExp.test(userId)){ //정규표현식을 만족하지 않은 경우
+                //사용자에게 알려줌
+                alert('유효한 아이디가 아닙니다. 다시 입력해주세요');
+
+                //사용자에게 다시 입력을 유도
+                document.getElementById('userId').select();
+                return false;
+            }
+
+
+            //비밀번호와 비밀번호 확인이 일치하면 true, 아니면 false 반환
+            var userPwd=document.getElementById('userPwd').value;
+            var checkPwd=document.getElementById('checkPwd').value;
+            if(userPwd!=checkPwd){ //일치하지 않을 경우 =>false
+                alert('비밀번호가 일치하지 않습니다');
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>

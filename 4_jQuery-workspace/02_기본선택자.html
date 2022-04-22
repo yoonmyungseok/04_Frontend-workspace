@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기본선택자</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>기본 선택자</h1>
+
+    <h3>* 아이디 선택자</h3>
+    <p>
+        특정 고유한 아이디값을 가진 요소 하나만을 선택하고자 할 때 사용
+    </p>
+
+    <h1 id="id1">ID1</h1>
+    <h2 id="id2">ID2</h2>
+
+    <script>
+        jQuery(document).ready(function(){
+            //-순수 자바스크립트 방식
+            //선택된 요소객체의 속성에 접근해서 대입을 통해 값을 바꿔주는 형식
+            document.getElementById('id1').style.color='red';
+            document.getElementById('id1').innerHTML='h1 변경';
+
+            //jQuery 방식
+            //선택된 요소객체에 메소드를 이용해서 값을 변경하는 형식
+            $('#id2').css('color','blue');
+            $('#id2').html('h2 변경');
+            // .html('바꿀값'): 선택된 요소의 innerHTML과 관련된 기능을 수행하는 메소드
+        });
+    </script>
+
+    <h3>* 태그 선택자</h3>
+    <p>JAVA</p>
+    <p>ORACLE</p>
+    <p>JDBC</p>
+
+    <h5>HTML</h5>
+    <h5>CSS</h5>
+    <h5>JAVASCRIPT</h5>
+
+    <script>
+        $(document).ready(function(){
+            //순수 자바스크립트 방식
+            var p=document.getElementsByTagName("p"); //[p요소, p요소, ...]
+            //p.style.color="yellow"; //배열이라 style 속성이 바로적용 안됨
+            for(var i=0; i<p.length; i++){
+                p[i].style.color='yellow';
+            }
+
+            //jQuery 방식=> $("태그명")
+            $("h5").css('color','orange');
+
+            //여러 종류의 선택자를 동시에 선택하고 싶다면?
+            $("p,h5,#id1").css('backgroundColor','pink');
+        });
+    </script>
+    <h3>* 클래스 선택자</h3>
+    <p>
+        특정한 클래스 속성을 가진 요소들을 여러개 선택하고자 할 때 사용
+    </p>
+    <h1 class="item">Class1</h1>
+    <h1 class="item select">Class2</h1>
+    <h1 class="item select">Class3</h1>
+    <script>
+        $(function(){
+            //순수 자바스크립트 방식
+            var items=document.getElementsByClassName('item'); // [h1, h1, h1]
+            for(var i=0; i<items.length; i++){
+                items[i].style.color='green';
+                items[i].onclick=function(){
+                    console.log('클릭됨');
+                };
+            }
+
+            //jQuery 방식 =>$('.클래스명')
+            $(".select").css('backgroundColor','lightgray');
+            $(".select").click(function(){
+                alert('클릭됨');
+            });
+            //.click(이벤트핸들러함수): 클릭이벤트와 관련된 기능 수행
+            
+        });
+    </script>
+    <!--
+        * 요소 선택하는 방법
+
+        순수 자바스크립트 방식                      |   jQuery 방식
+        ========================================================================
+        document.getElementById("아이디명")         |   $("#아이디명")
+        document.getElementsByTagName("태그명")     |   $("태그명")
+        document.getElementsByClassName("클래스명") |   $(".클래스명")
+        
+        *선택된 요소에 속성값을 변경하고자 할 때 
+
+                    순수 자바스크립트 방식                      |   jQuery 방식
+                    ========================================================================
+                    선택된 요소객체의 속성에 접근해서 대입      |   선택된 요소 객체에 메소드를 이용해서 변경
+        스타일관련 |요소객체.style.스타일속성명="값";           |   요소객체.css("스타일속성명","값");
+        내용관련   |요소객체.innerHTML="값";                    |   요소객체.html("값");
+        이벤트관련 |요소객체.on이벤트명=function(){};           |   요소객체.이벤트명(function(){});
+    -->
+</body>
+</html>

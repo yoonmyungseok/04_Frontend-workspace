@@ -37,16 +37,15 @@
 	</fieldset>
 	<script>
 		function answer02(){
-			var arr=['홍길동','이순신','김선달','유재석','강호동'];
-			
-			var name=document.getElementById('name').value;
-			var index=arr.indexOf(name);
-			if(index=='-1'){
+			var str=document.getElementById('nameList').innerText;
+			var name=str.split(" ");
+			if(name.indexOf(document.getElementById('name').value)==-1){
 				alert('이름이 없습니다');
 			}else{
 				alert('이름이 있습니다');
 			}
-			
+
+
 		}
 	</script>
 	<!--------------------------------------------------------------------------------------------------------->
@@ -64,11 +63,11 @@
 
 			for(var i=0; i<radio.length; i++){
 				if(radio[0].checked){
-					window.open('http://www.naver.com',"","_blank");
+					open('http://www.naver.com');
 				}else if(radio[1].checked){
-					window.open('http://www.google.com',"","_blank");
+					open('http://www.google.com');
 				}else if(radio[2].checked){
-					window.open('http://www.w3schools.com',"","_blank");
+					open('http://www.w3schools.com');
 				}
 			}
 		}
@@ -77,14 +76,24 @@
 	<fieldset>
 		<legend>문제 4</legend>
 		<h3>전체선택버튼을 클릭하면 체크항목을 모두 체크하거나 모두 해제해 주세요.</h3>
-		<input type="checkbox" name="all" onclick="answer04(this.checked);"/>전체선택<br/>
+		<input type="checkbox" name="all" onclick="answer04(this);"/>전체선택<br/>
 		<input type="checkbox" name="subject" />Java<br/>
 		<input type="checkbox" name="subject" />DataBase<br/>
 		<input type="checkbox" name="subject" />Web<br/>
 		
 	</fieldset>
 	<script>
-		
+		function answer04(checkAll){
+			var checkbox=document.getElementsByName('subject');
+
+			for(var i in checkbox){
+				if (checkAll.checked == true){
+					checkbox[i].checked = true;
+				}else{
+					checkbox[i].checked = false;
+				}
+			}
+		}
 	</script>
 	<!--------------------------------------------------------------------------------------------------------->
 	<fieldset>
@@ -95,11 +104,8 @@
 	</fieldset>
 	<script>
 		function answer05(){
-			document.getElementById('randomInput').value=ran();
-		}
-		function ran(){
-			var ran=Math.round(Math.random()*20+1);
-			return ran;
+			var ran = Math.round(Math.random() * 20 + 1);
+			document.getElementById('randomInput').value=ran;
 		}
 	</script>
 	<!--------------------------------------------------------------------------------------------------------->
@@ -114,7 +120,16 @@
 		</select>
 	</fieldset>
 	<script>
-		
+		function answer06(){
+			var sc=document.getElementById('locationSelect').value;
+			if(sc=='naver'){
+				open("http://www.naver.com");
+			}else if(sc=='google'){
+				open("http://www.google.com");
+			}else if(sc=='w3schools'){
+				open("http://www.w3schools.com");
+			}
+		}
 	</script>
 	<!--------------------------------------------------------------------------------------------------------->
 	<fieldset>
@@ -123,7 +138,19 @@
 		숫자 : <span id="numVal">1,4,2,3,11,32,27,5</span>
 		<button onclick="answer07();">정렬</button>
 	</fieldset>
-	
+	<script>
+		function answer07(){
+			var numVal=document.getElementById('numVal').innerText;
+			var arr=numVal.split(",");
+			for(var i=0; i<arr.length; i++){
+				arr[i]=Number(arr[i]);
+			}
+			arr.sort(function(a,b){
+				return a-b;
+			});
+			alert(arr);
+		}
+	</script>
 		
 	<!--------------------------------------------------------------------------------------------------------->
 	<fieldset>
@@ -131,6 +158,22 @@
 		<h3>개강일부터 오늘까지의 날짜를 alert으로 출력해 주세요. (getTime() 메서드 사용)</h3>
 		개강일 : <input type="date" id="startDate"/> <button onclick="answer08();">날짜</button>
 	</fieldset>
+	<script>
+		function answer08(){
+			var date = document.getElementById("startDate").value; // 문자열 타입 "2022-02-07"
+
+			// 년-월-일 을 -를 구분자로 하여 배열로 쪼개기
+			var dates = date.split("-");
+
+			// getTime() : 현재 시간을 1970년 01월 01일 기준으로 밀리세컨초로 나타냄 (안써도 무방)
+			var start = new Date(dates[0], dates[1] - 1, dates[2]) /* .getTime() */;
+			var now = new Date() /* .getTime() */;
+
+			var dday = Math.ceil((now - start) / (24 * 60 * 60 * 1000));
+
+			alert("개강일부터 오늘까지 벌써 " + dday + "일이 지났습니다.");
+		}
+	</script>
 	
 	<!--------------------------------------------------------------------------------------------------------->
 	<fieldset>
@@ -154,7 +197,18 @@
 			</tbody>
 		</table>
 	</fieldset>
-	
+	<script>
+		function answer09(){
+			var name=document.getElementsByName('name');
+			var age=document.getElementsByName('age');
+			var gender=document.getElementsByName('gender');
+			var table = document.getElementById('createTable');
+
+			for(var i=0; i<name.length; i++){
+				table.innerHTML += "<tr><td>" + name[i].value + "</td><td>" + age[i].value + "</td><td>" + gender[i].value + "</td></tr>";
+			}
+		}
+	</script>
 	<!--------------------------------------------------------------------------------------------------------->
 	<fieldset>
 		<legend>문제 10</legend>
@@ -163,7 +217,14 @@
 		<input type="text" id="gugudan" /> <button onclick="answer10();">출력</button>
 	</fieldset>
 	<script>
-		
+		function answer10(){
+			var dan=document.getElementById('gugudan').value;
+			var result="";
+			for(var i=1; i<=9; i++){
+				result+=(dan+" * "+i+"="+dan*i)+"\n";
+			}
+			alert(result);
+		}
 	</script>
 </body>
 </html>

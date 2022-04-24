@@ -56,7 +56,15 @@
 		<input type="radio" name="rdo" value="w3schools" onclick="answer03();"/>w3schools<br/>
 	</fieldset>
 	<script>
-		
+		function answer03(){
+			var site=document.getElementsByName('rdo');
+			console.log(site[0].value);
+			for(var i in site){
+				if(site[i].checked){
+					location.href="http://www."+site[i].value+".com";
+				}
+			}
+		}
 	</script>
 	<!--------------------------------------------------------------------------------------------------------->
 	
@@ -68,7 +76,13 @@
 		<input type="checkbox" name="subject" />Web<br/>
 		<button onclick="answer04();">클릭</button>
 	</fieldset>
-	
+	<script>
+		function answer04(){
+			var checkbox=document.getElementsByName('subject');
+			console.log(checkbox[0].checked);
+			checkbox[0].checked=true;
+		}
+	</script>
 	<!--------------------------------------------------------------------------------------------------------->
 	
 	<fieldset>
@@ -77,7 +91,13 @@
 		랜덤 : <input type="text" readonly="readonly" id="randomVAl" />
 		<button onclick="answer05();">클릭</button>
 	</fieldset>
-	
+	<script>
+		function answer05(){
+			var ran=Math.random()*45+1;
+			console.log(Math.ceil(ran));
+			document.getElementById('randomVAl').value=Math.ceil(ran);
+		}
+	</script>
 	<!--------------------------------------------------------------------------------------------------------->
 	
 	<fieldset>
@@ -91,7 +111,11 @@
 		</select>
 		<button onclick="answer06();">클릭</button>
 	</fieldset>
-	
+	<script>
+		function answer06(){
+			
+		}
+	</script>
 	<!--------------------------------------------------------------------------------------------------------->
 	
 	<fieldset>

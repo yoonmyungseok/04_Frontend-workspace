@@ -149,21 +149,43 @@
 		<button id="btn6">버튼</button>
 	</fieldset>
 	<script>
-		
+		$(function(){
+			$('#btn6').click(function(){
+				$('.bgBox').each(function () {
+					// element == this
+					if($(this).children().is('span')){
+						$(this).remove();
+					}
+				});
+			})
+		})
 	</script>
 	
 	<!--------------------------------------------------------------------------------------------------------->
 	<fieldset>
 		<legend>문제 7</legend>
 		<h3>table의 row1(첫번째 tr)과 row2(두번째 tr) 의 위치를 바꿔주세요.</h3>
-		<table border="1">
-			<tr><td>ROW1</td><td>아래로!</td></tr>
-			<tr><td>ROW2</td><td>위로!</td></tr>
+		<table border="1" id="tb1">
+			<tr>
+				<td>ROW1</td>
+				<td>아래로!</td>
+			</tr>
+			<tr>
+				<td>ROW2</td>
+				<td>위로!</td>
+			</tr>
 		</table>
 		<br/>
-		<button>버튼</button>
+		<button id="btn7">버튼</button>
 	</fieldset>
-	
+	<script>
+		$(function(){
+			$('#btn7').click(function(){
+				var s=$('#tb1').children().children().first().remove();
+				$('#tb1').children().append(s);
+			})
+		})
+	</script>
 	<!--------------------------------------------------------------------------------------------------------->
 	<fieldset>
 		<legend>문제 8</legend>
@@ -180,9 +202,19 @@
 			</tr>
 		</table>
 		<br/>
-		<button>버튼</button>
+		<button id="btn8">버튼</button>
 	</fieldset>
-	
+	<script>
+		$(function(){
+			$('#btn8').click(function(){
+				$('#cellTable').find('td').each(function(){
+					if($(this).text()>10){
+						$(this).css('backgroundColor','yellow');
+					}	
+				})
+			})
+		})
+	</script>
 	<!--------------------------------------------------------------------------------------------------------->
 	<fieldset>
 		<legend>문제 9</legend>
@@ -193,17 +225,34 @@
 			<span>blink</span>
 		</div>
 		<br/>
-		<button>버튼</button>
+		<button id="btn9">버튼</button>
 	</fieldset>
-	
+	<script>
+		$(function(){
+			$('#btn9').click(function(){
+				$('.box').children().each(function () {
+					// element == this
+					if($(this).text().includes('bold')){
+						$(this).css('fontWeight','bold');
+					}
+				});
+			})
+		})
+	</script>
 	<!--------------------------------------------------------------------------------------------------------->
 	<fieldset>
 		<legend>문제 10</legend>
 		<h3>input 태그의 내용을 읽기전용으로 바꾸고, 폰트 색을 red로 적용해주세요.</h3>
 		<input type="text" value="읽기전용으로 바꿔주세요." id="lastQuestion"/>
 		<br/>
-		<button>버튼</button>
+		<button id="btn10">버튼</button>
 	</fieldset>
-
+	<script>
+		$(function(){
+			$('#btn10').click(function(){
+				$('#lastQuestion').css('color','red').attr('readonly',true);
+			})
+		})
+	</script>
 </body>
 </html>

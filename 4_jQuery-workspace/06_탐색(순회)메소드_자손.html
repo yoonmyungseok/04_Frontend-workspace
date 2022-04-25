@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>탐색(순회)메소드-자손</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        #wrap,
+        #wrap * {
+            border: 1px solid lightgray;
+            display: block;
+            margin: 15px;
+            padding: 5px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>탐색(순회)메소드(Traversing)</h1>
+    <h3>
+        * Descendants(자손) 메소드: 기준이 되는 요소의 하위요소들을 선택할 수 있는 메소드
+    </h3>
+    <div id="wrap">조상
+        <div>div(증조할머니)
+            <ul>ul(할머니)
+                <li>li(엄마)
+                    <span>span</span>
+                </li>
+            </ul>
+        </div>
+        <div>div(할아버지)
+            <p>p(아빠)
+                <span>span</span>
+            </p>
+        </div>
+    </div>
+    <p>
+        <h4>- $('선택자').children()</h4>
+        선택된 요소의 모든 자손(바로 하위) 요소들을 선택
+
+        <h4>- $('선택자').children('선택자')</h4>
+        선택된 요소의 모든 자손요소들 중에서 매개변수로 제시한 값과 일치하는 요소들만 선택
+
+        <h4>- $('선택자').find('선택자')</h4>
+        선택된 요소의 모든 후손(자식포함)요소들 중에서 매개변수로 제시한 값과 일치하는 요소들만 선택
+    </p>
+    <script>
+        $(function(){
+            //앞으로 부여할 스타일 객체
+            var style1={color:'red',border:'2px solid red'};
+            var style2={color:'blue',border:'2px solid blue'};
+            var style3={color:'green',border:'2px solid green'};
+            var style4={color:'orange',border:'2px solid orange'};
+            var style5={color:'purple',border:'2px solid purple'};
+
+            //children()
+            $('#wrap').children().css(style1);
+            $('#wrap').children().children().css(style2);
+            //#wrap의 자손의 자손을 선택 (ul, p)
+
+            //children('선택자')
+            $("#wrap").children().children('ul').css(style3);
+            //#wrap의 자손의 자손 중에서 ul 요소만 선택
+
+            //find('선택자')
+            $("#wrap").find("li").css(style4);
+            //#wrap의 모든 자손, 후손들 중에서 li 요소만 선택
+
+            $('#wrap').find('span').css(style5);
+            //#wrap의 모든 자손,후손들 중에서 span 요소만 선택
+        });
+    </script>
+</body>
+</html>

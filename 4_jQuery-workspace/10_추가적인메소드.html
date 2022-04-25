@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>추가적인 메소드</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .highlight-0{
+            background-color: red;
+        }
+        .highlight-1{
+            background-color: orange;
+        }
+        .highlight-2{
+            background-color: yellow;
+        }
+        .highlight-3{
+            background-color: green;
+        }
+        .highlight-4{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>추가적인 메소드</h1>
+    <h3>* each 메소드</h3>
+    <p>
+        배열의 모든 인덱스에 순차적으로 접근하고자 할 때, <br>
+        객체가 가지고 있는 모든 속성에 순차적으로 접근하고자 할 때<br>
+        사용되는 for in 문과 유사하게 수행되는 메소드
+
+    </p>
+    <pre>
+        [표현법]
+        1)
+        $.each(객체명/배열명, function(매개변수1, 매개변수2){
+            순차적으로 접근해서 실행할 내용;
+        });
+
+        2)
+        객체명/배열명.each(function(매개변수1, 매개변수2){
+            순차적으로 접근해서 실행할 내용;
+        });
+
+        순차적으로 객체/배열의 인덱스에 접근할 때마다 함수가 실행(익명함수)
+        매개변수1, 매개변수2는 생략 가능
+
+        만약 객체명을 제시한 경우
+        매개변수1에는 순차적으로 접근된 객체의 속성명(키)이 담김
+        매개변수2에는 해당 속성값(value)이 담김
+
+        만약 배열명을 제시한 경우
+        매개변수1에는 순차적으로 접근된 배열의 인데스수가 담김
+        매개변수2에는 해당 인덱스값이 담김
+    </pre>
+    <div id="area1">
+
+    </div>
+    <script>
+        $(function(){
+            //배열을 제시하는 경우
+            var arr=['김','가','현','최','고'];
+
+            /*
+            for(var i=0; i<arr.length; i++){
+
+            }*/
+            /*
+            for(var i in arr){
+
+            }*/
+
+            //1번째 방법 $.each 메소드 이용
+            $.each(arr, function (index, value) { 
+                console.log('인덱스:'+index+', 값: '+value);
+            });
+
+            //2번째 방법 객체명/배열명.each 메소드 이용
+            //arr.each(function(index, value){
+                //arr 배열의 선언부가 자바스크립트 형식이기 때문에 오류
+            $(arr).each(function (index, value) {
+                //$()로 감싸주면 jQuery화 되어 오류없이 사용할 수 있음
+                console.log('인덱스:' + index + ', 값: ' + value);
+            });
+
+            //객체를 제시하는 경우
+            var student={
+                name:'홍길동',
+                age:20,
+                address:'서울'
+            };
+            /*
+            for(var key in student){
+                console.log(student[key]);
+            }
+            */
+            
+            //1번째 방법
+            $.each(student, function (key, value) { 
+                console.log("속성명: "+key+", 속성값: "+value);
+            });
+            
+            //2번째 방법=>이용 불가
+            //객체를 제시한 경우에는 첫번째 방법만 쓰인다
+            $(student).each(function (key, value) {
+                // element == this
+                console.log("속성명: "+key+", 속성값: "+value);
+            });
+
+            //객체 배열을 제시할 경우
+            var links=[{
+                name:'네이버',
+                link:'http://www.naver.com'
+            },{
+                name:'구글',
+                link:'http://www.google.com'
+            },{
+                name:'다음',
+                link:'http://www.daum.net'
+            }];
+            //<a href="link값">name값</a> 순차적으로 출력
+            var output="";
+
+            $.each(links, function (index, item) { 
+                output+="<a href='"+item['link']+"'>"+item.name+"</a> <br>";
+            });
+            $('#area1').html(output);
+        });
+    </script>
+    <br><br>
+    <!--
+        대표적으로 each 메소드를 쓰는 경우: 선택된 여러개의 요소에 순차적으로 접근하고자 할 때
+    -->
+    <div id="wrap">
+        <h1>item-1</h1>
+        <h1>item-2</h1>
+        <h1>item-3</h1>
+        <h1>item-4</h1>
+        <h1>item-5</h1>
+    </div>
+    <script>
+        $(function(){
+            //[h1,h1,h1,h1,h1] =>선택자를 이용해서 요소가 여러개 선택될 경우는 배열로 선택됨
+            //$('#wrap>h1')
+            $("#wrap").children().each(function(index,el){
+                //el: 순차적으로 접근된 h1 요소 객체
+                console.log(el);
+
+                //클래스 추가해서 스타일 입혀보기(.addClass("클래스명"))
+                //el.addClass('highlight-'+index);
+
+                //addClass는 제이쿼리 방식의 메소드지만
+                //el은 자바스크립트 방식의 요소 객체들이 담겨있는 꼴
+
+                //해결방법1: 자바스크립트 방식으로 클래스 속성 부여
+                //=>class속성값에 직접접근
+                //el.className='highlight-'+index;
+
+                //해결방법2: jQuery 방식으로 클래스 속성 부여
+                //=> $(자바스크립트방식의요소객체)
+                //$(el).addClass("highlight-"+index);
+                
+                //해결방법3: each 메소드에서의 $(this)=>순차적으로 접근되는 해당 요소객체를 의미
+                $(this).addClass('highlight-'+index);
+                //$(this)==$(el)
+
+            })
+        })
+    </script>
+    <hr>
+    <h3>* is 메소드</h3>
+    <p>
+        $("선택자").is("선택자") <br>
+        선택한 요소가 내가 전달한 전달값과 일치하는지 판단해서 
+        그에 해당하는 논리값을 반환해주는 메소드 <br>
+        =>일치할 경우 true / 일치하지 않을 경우 false 반환
+    </p>
+
+    <h3 class="test">test1</h3>
+    <h3>test2</h3>
+    <h3 class="test">test3</h3>
+    <h3 class="test">test4</h3>
+    <h3>test5</h3>
+    <h3 class="test">test6</h3>
+
+    <script>
+        $(function(){
+            $('h3').each(function(){
+                //현재 순차적으로 접근하는 h3요소가 test 클래스를 가지고 있나 검사
+                //=>test 클래스를 가진 경우는 배경색 변경
+                if($(this).is(".test")){
+                    $(this).css('backgroundColor','orange');
+                }else{
+                    $(this).css('backgroundColor','purple');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

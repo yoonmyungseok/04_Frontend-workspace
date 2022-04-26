@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시각적인 효과 메소드 3</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        div{
+            background-color: beige;
+            width: 300px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 10px;
+            border: 1px solid yellow;
+            cursor: pointer;
+        }
+        p{
+            border:1px solid lightgray;
+            width: 300px;
+            height: 100px;
+            margin-top: 5px;
+            border-radius: 10px;
+            padding: 10px;
+            box-sizing: border-box;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h3>* slideDown(), slideUp(): 쇼핑몰 FAQ 예시</h3>
+    <!--FAQ:Frequently Asked Questions, 자주묻는질문-->
+    <div>Q. 반품 언제되나요?</div>
+    <p>A. 지금 확인중입니다.</p>
+
+    <div>Q. 상품 위치를 알고싶습니다.</div>
+    <p>A. 배송 조회를 해보세요. 거기에 다 나와있어요</p>
+
+    <div>Q. 이 사이즈 있나요?</div>
+    <p>A. 네 있어요 ^____^</p>
+
+    <div>Q. 전화 통화 가능한 시간대를 알려주세요.</div>
+    <p>A. 플러스친구 카톡을 활용하면 24시간 내에 답변드리겠습니다</p>
+
+    <div>Q. 판매자가 연락이 안됩니다</div>
+    <p>A. 경찰에 신고하세요</p>
+
+    <script>
+        $(function(){
+            $('div').click(function(){
+                //$(this) : 현재 클릭이벤트가 발생한 div 요소 (target)
+                //$(this).next(): 현재 클릭이벤트가 발생한 div 요소 바로 다음에 나오는 p 요소=>해당 답변
+                var $p=$(this).next(); //p요소 자체를 변수에 담아두기
+                //jQuery 방식으로 선택된 '요소'를 변수에 담고자 할 때에는 변수명 앞에 $를 붙인다
+                
+                //console.log($p.css("display")); //none
+
+                if($p.css('display')=='none'){ //p요소가 보이지 않는다면
+                    //css() 메소드 또한 속성명만 매개변수로 넘기게되면 해당 속성값을 반환해준다
+                    //getter/setter 역할 동시에 가능
+
+                    //기존에 열려있던 답변들을 닫아주기
+                    $(this).siblings("p").slideUp(1000);
+
+                    //보여지게끔
+                    $p.slideDown(1000);
+                }else{ //p요소가 보인다면
+                    $p.slideUp(1000);
+                }
+            })
+        })
+    </script>
+</body>
+</html>

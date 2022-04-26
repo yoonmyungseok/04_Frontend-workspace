@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시각적인 효과 메소드1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h1>시각적인 효과 메소드(Effect 메소드)</h1>
+    <p>
+        페이지 내에 애니메이션 효과를 만들기 위해 사용되는 메소드 집합 <br>
+    </p>
+    <h3>* show(), hide(), toggle()</h3>
+    <p>
+        선택된 요소가 점점 커지면서 보이고, 점점 작아지면서 사라지게 하는 메소드
+    </p>
+    <button id="hide">숨기기</button>
+    <button id="show">보여주기</button>
+    <button id="toggle">토글</button>
+    <br><br>
+    <img src="resources/image/bono.jpg" id="bono">
+    <!--꼭 이미지 태그가 아니더라도 다른 요소에도 적용 가능-->
+    <div id="area" style="width: 100px; height: 100px; background-color: red;"></div>
+    <script>
+        $(function(){
+            $('#hide').click(function(){
+                //밀리세컨초 단위로 시간을 정해주면 그 시간에 걸쳐서 점점 작아지면서 사라짐
+                $('#bono').hide(1000);
+                $('#area').hide(1000);
+            })
+            $('#show').click(function(){
+                //밀리세컨초 단위로 시간을 정해주면 그 시간에 걸쳐서 점점 커지면서 나타남
+                $('#bono').show(1000);
+                $('#area').show(1000);
+            })
+            //toggle: on/off 기능이다
+            $('#toggle').click(function(){
+                //밀리세컨초 단위
+                $('#bono').toggle(1000);
+                $('#area').toggle(1000);
+            })
+
+            //개발자 도구탭에서 style 속성이 실시간으로 변화되는것을 확인 가능
+        })
+    </script>
+</body>
+</html>
